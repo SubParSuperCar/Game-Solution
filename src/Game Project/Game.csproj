@@ -1,0 +1,40 @@
+<Project Sdk="Godot.NET.Sdk/4.6.0">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<AnalysisMode>Recommended</AnalysisMode>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+	</PropertyGroup>
+
+	<!-- Create an executable for Avalonia designer support -->
+	<PropertyGroup Condition="$(Configuration) == 'Debug'">
+		<OutputType>Exe</OutputType>
+		<UseAppHost>false</UseAppHost>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia.Themes.Simple" Version="[11.3.0]"/>
+		<PackageReference Include="Avalonia.Xaml.Behaviors" Version="[11.2.0.1]"/>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="../Estragonia Package Project/Estragonia.csproj"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<AvaloniaResource Include="UI/Fonts/*.ttf"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Properties/launchSettings.json"/>
+		<None Include="shaders/*.gdshader"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="UI\Fonts\OFL.txt"/>
+	</ItemGroup>
+
+</Project>
