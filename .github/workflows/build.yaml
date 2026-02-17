@@ -15,6 +15,10 @@ jobs:
     name: Build & Test
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: Game Solution
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,16 +29,18 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Restore
-        run: dotnet restore "Game Solution/Game.sln"
+        run: dotnet restore Game.sln
 
       - name: Build (Debug)
-        run: dotnet build "Game Solution/Game.sln" --no-restore --configuration Debug
+        run: dotnet build Game.sln --no-restore --configuration Debug
 
       - name: Build (Release)
-        run: dotnet build "Game Solution/Game.sln" --no-restore --configuration Release
+        run: dotnet build Game.sln --no-restore --configuration Release
 
       - name: Create source archive
+        working-directory: ${{ github.workspace }}
         run: |
+          mkdir -p dist
           git archive \
             --format=zip \
             --prefix="Game Solution/" \
