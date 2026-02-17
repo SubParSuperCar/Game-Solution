@@ -9,8 +9,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="GodotSharp" Version="4.5.0"/>
-		<PackageReference Include="Avalonia.Skia" Version="[11.3.0]"/>
+		<PackageReference Include="GodotSharp" Version="4.6.0"/>
+		<PackageReference Include="Avalonia.Skia" Version="11.3.0"/>
 		<PackageReference Include="SkiaSharp.NativeAssets.macOS" Version="2.88.9"/>
 	</ItemGroup>
 
@@ -19,11 +19,11 @@
 		<None Remove="license.txt"/>
 
 		<None Include="Directory.Build.props">
-			<Link>Project Items\Directory.Build.props</Link>
+			<Link>Project Items/Directory.Build.props</Link>
 		</None>
 
 		<None Include="license.txt">
-			<Link>Project Items\license.txt</Link>
+			<Link>Project Items/license.txt</Link>
 		</None>
 	</ItemGroup>
 

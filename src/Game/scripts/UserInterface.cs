@@ -3,6 +3,7 @@ using Estragonia;
 using Game.UI;
 using Godot;
 
+// ReSharper disable once CheckNamespace
 namespace Game;
 
 public sealed partial class UserInterface : AvaloniaControl

@@ -1,7 +1,7 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game", "Game Project\Game.csproj", "{8CFBC98F-46CD-4F19-97A3-5D36B11C54EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game", "Game/Game.csproj", "{8CFBC98F-46CD-4F19-97A3-5D36B11C54EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estragonia", "Estragonia Package Project\Estragonia.csproj", "{B3C282DD-56EA-43D7-A31C-BF28AEC62671}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estragonia", "Estragonia/Estragonia.csproj", "{B3C282DD-56EA-43D7-A31C-BF28AEC62671}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "", "{0C36314E-302D-4A8B-8749-25B1C83A9523}"
 	ProjectSection(SolutionItems) = preProject

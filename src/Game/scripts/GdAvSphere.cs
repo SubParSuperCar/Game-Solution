@@ -1,6 +1,7 @@
 using System;
 using Godot;
 
+// ReSharper disable once CheckNamespace
 namespace Game;
 
 public partial class GdAvSphere : MeshInstance3D
