@@ -1,0 +1,49 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
+      - name: Restore
+        run: dotnet restore "Game Solution/Game.sln"
+
+      - name: Build (Debug)
+        run: dotnet build "Game Solution/Game.sln" --no-restore --configuration Debug
+
+      - name: Build (Release)
+        run: dotnet build "Game Solution/Game.sln" --no-restore --configuration Release
+
+      - name: Create source archive
+        run: |
+          git archive \
+            --format=zip \
+            --prefix="Game Solution/" \
+            --output="dist/Game_Solution_src_${{ github.sha }}.zip" \
+            HEAD
+
+      - name: Upload source archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-archive
+          path: dist/*.zip
+          retention-days: 30
