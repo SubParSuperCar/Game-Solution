@@ -1,0 +1,9 @@
+bin/
+obj/
+.idea/
+.vs/
+.godot/
+/_ReSharper.Caches/
+*.user
+*.blend1
+dist/
