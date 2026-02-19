@@ -1,17 +1,15 @@
 # Game-Solution
 
-This solution uses a fork of [Estragonia](https://github.com/MrJul/Estragonia) by [Julien Lebosquain](https://github.com/MrJul) ("MrJul"), updated for **.NET 8**. Estragonia is a bridge for using the [Avalonia UI v11.3.0 framework](https://github.com/AvaloniaUI/Avalonia/releases/tag/11.3.0) in the [Godot Engine v4.6](https://github.com/godotengine/godot/releases/tag/4.6-stable).
+A Godot + Avalonia UI game project built on a fork of [Estragonia](https://github.com/MrJul/Estragonia) (MIT licensed) by [Julien Lebosquain](https://github.com/MrJul) ("MrJul") and its contributors. This fork targets **.NET 8**, [Avalonia UI v11.3.0](https://github.com/AvaloniaUI/Avalonia/releases/tag/11.3.0), and [Godot Engine v4.6](https://github.com/godotengine/godot/releases/tag/4.6-stable).
 
-In addition to Vulkan, this fork supports Apple's Metal graphics API on macOS, contributed by [sjennings](https://github.com/sjennings). Most updates are pull-request implementations from the official Estragonia repository, along with ReSharper-based refactoring, code cleanup, and removal of unused members.
+## Changes from upstream
 
-Although the logic has been optimized, some spacing and formatting inconsistencies may remain.
+- **Metal support** on macOS, contributed by [sjennings](https://github.com/sjennings)
+- Applied pending pull requests from the upstream repository
+- ReSharper-based refactoring, code cleanup, and unused member removal
 
----
+## Getting the source
 
-**Disclaimer:**  
-This repository is primarily a personal backup and reference, though it may be useful to others. It is *not* intended as a formal publication. Experience with Git and GitHub workflows here is limited; if any credits, acknowledgements, or other elements are missing, please notify me or submit a PR so they can be corrected. Thank you :)
+A `.zip` archive of `src/` is published under the **Actions** tab on each push to `main` and kept for 30 days. [download-directory.github.io](https://download-directory.github.io/) can also download individual repository subdirectories as a `.zip`.
 
----
-
-**Tip:**  
-To make it easier to get the source code, a `.zip` archive of the `src/` directory is available under the **Actions** tab. The tool at <https://download-directory.github.io/> may also be used to download individual GitHub repository directories as `.zip` files.
+> This repository is a personal backup and reference. If any credits or acknowledgements are missing, open an issue or submit a PR.

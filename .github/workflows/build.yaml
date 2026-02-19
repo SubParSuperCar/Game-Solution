@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
@@ -12,9 +12,10 @@ env:
 
 jobs:
   build:
-    name: Build & Archive
+    name: Build (${{ matrix.configuration }})
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         configuration: [Debug, Release]
     defaults:
@@ -25,6 +26,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
       - name: Cache NuGet packages
         uses: actions/cache@v4
         with:
@@ -33,15 +39,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget-
 
-      - name: Set up .NET SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.x'
-
       - name: Restore dependencies
         run: dotnet restore Game.sln
 
-      - name: Build (${{ matrix.configuration }})
+      - name: Build
         run: dotnet build Game.sln --no-restore --configuration ${{ matrix.configuration }}
 
       - name: Package source archive
