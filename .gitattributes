@@ -1,5 +1,4 @@
-# Automatically normalize line endings
-* text=auto
+*text=auto
 *.godot text eol=lf
 *.import text eol=lf
 *.tscn text eol=lf
