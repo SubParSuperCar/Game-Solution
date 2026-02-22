@@ -14,6 +14,7 @@ public sealed partial class GameViewModel : ViewModel
 	{
 		if (GameNode is null)
 			return Task.CompletedTask;
+
 		_anchorNode = SceneTree?.Root.GetNode("Root/Game");
 		_anchorNode?.AddChild(GameNode);
 
@@ -24,6 +25,7 @@ public sealed partial class GameViewModel : ViewModel
 	{
 		if (GameNode is null)
 			return base.TryCloseCoreAsync();
+
 		_anchorNode?.RemoveChild(GameNode);
 		GameNode.Free();
 		GameNode = null;

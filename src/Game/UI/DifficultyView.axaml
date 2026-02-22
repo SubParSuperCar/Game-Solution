@@ -33,7 +33,6 @@
 	</ui:View.DirectionalFocusStructure>
 
 	<Grid RowDefinitions="Auto,*,Auto">
-
 		<!-- ReSharper disable Xaml.StyleClassNotFound -->
 		<TextBlock
 			Classes="view-title"
@@ -42,14 +41,12 @@
 
 		<Border Classes="centered-view-content" Grid.Row="1">
 			<!-- ReSharper restore Xaml.StyleClassNotFound -->
-
 			<controls:ExtendedListBox
 				x:Name="DifficultiesListBox"
 				ItemsSource="{Binding Difficulties}"
 				SelectedItem="{Binding SelectedDifficulty}"
 				Background="Transparent"
 				ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
-
 		</Border>
 
 		<!-- Buttons -->
@@ -79,11 +76,7 @@
 					<behaviors:FocusWithPointerBehavior />
 					<behaviors:MoveFocusWhenDisabledBehavior Target="{Binding #CloseButton}" />
 				</Interaction.Behaviors>
-
 			</Button>
-
 		</StackPanel>
-
 	</Grid>
-
 </ui:View>

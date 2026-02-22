@@ -14,8 +14,7 @@ internal sealed class GodotKeyboardNavigationHandler : IKeyboardNavigationHandle
 	{
 	}
 
-	public void Move(IInputElement element, NavigationDirection direction, KeyModifiers keyModifiers = KeyModifiers.None)
-	{
+	public void Move(IInputElement element, NavigationDirection direction,
+		KeyModifiers keyModifiers = KeyModifiers.None) =>
 		_keyboardNavigationHandler.Move(element, direction, keyModifiers);
-	}
 }

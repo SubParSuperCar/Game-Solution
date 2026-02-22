@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,13 +10,8 @@ public sealed partial class OptionsViewModel(UiOptions uiOptions) : ViewModel
 	private bool _canApply;
 
 	[ObservableProperty] private bool _fullscreen = uiOptions.Fullscreen;
-
 	[ObservableProperty] private bool _showFps = uiOptions.ShowFps;
-
-	[ObservableProperty]
-	[SuppressMessage("ReSharper", "InconsistentNaming", Justification = "Name required for correct property generation")]
-	private double _UIScale = uiOptions.UIScale;
-
+	[ObservableProperty] private double _uiScale = uiOptions.UiScale;
 	[ObservableProperty] private bool _vSync = uiOptions.VSync;
 
 	public bool CanApply
@@ -34,14 +28,11 @@ public sealed partial class OptionsViewModel(UiOptions uiOptions) : ViewModel
 	{
 		base.OnPropertyChanged(e);
 
-		if (e.PropertyName is nameof(VSync) or nameof(Fullscreen) or nameof(ShowFps) or nameof(UIScale))
+		if (e.PropertyName is nameof(VSync) or nameof(Fullscreen) or nameof(ShowFps) or nameof(UiScale))
 			CanApply = true;
 	}
 
-	protected override Task LoadAsync()
-	{
-		return Task.CompletedTask;
-	}
+	protected override Task LoadAsync() => Task.CompletedTask;
 
 	[RelayCommand(CanExecute = nameof(CanApply))]
 	private void Apply()
@@ -49,7 +40,7 @@ public sealed partial class OptionsViewModel(UiOptions uiOptions) : ViewModel
 		uiOptions.VSync = VSync;
 		uiOptions.Fullscreen = Fullscreen;
 		uiOptions.ShowFps = ShowFps;
-		uiOptions.UIScale = UIScale;
+		uiOptions.UiScale = UiScale;
 		CanApply = false;
 	}
 }

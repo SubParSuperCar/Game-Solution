@@ -47,6 +47,7 @@
 					BorderBrush="{TemplateBinding BorderBrush}"
 					BorderThickness="{TemplateBinding BorderThickness}"
 					CornerRadius="{TemplateBinding CornerRadius}">
+
 					<Grid Margin="{TemplateBinding Padding}">
 						<Track
 							x:Name="PART_Track"
@@ -55,6 +56,7 @@
 							Value="{TemplateBinding Value, Mode=TwoWay}"
 							IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
 							Orientation="Horizontal">
+
 							<Track.DecreaseButton>
 								<RepeatButton
 									x:Name="PART_DecreaseButton"
@@ -62,6 +64,7 @@
 									Background="{TemplateBinding Foreground}"
 									Focusable="False" />
 							</Track.DecreaseButton>
+
 							<Track.IncreaseButton>
 								<RepeatButton
 									x:Name="PART_IncreaseButton"
@@ -69,6 +72,7 @@
 									Background="{TemplateBinding Background}"
 									Focusable="False" />
 							</Track.IncreaseButton>
+
 							<Thumb
 								x:Name="Thumb"
 								Width="6"
@@ -104,7 +108,5 @@
 		<Style Selector="^:focus /template/ Thumb#Thumb">
 			<Setter Property="Background" Value="{StaticResource ButtonFocusBorderBrush}" />
 		</Style>
-
 	</ControlTheme>
-
 </ResourceDictionary>

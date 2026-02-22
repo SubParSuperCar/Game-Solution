@@ -43,18 +43,17 @@ internal static class GodotPlatform
 			.Bind<IWindowingPlatform>().ToConstant(new GodotWindowingPlatform())
 			.Bind<IStorageProviderFactory>().ToConstant(new GodotStorageProviderFactory())
 			.Bind<PlatformHotkeyConfiguration>().ToConstant(CreatePlatformHotKeyConfiguration())
-			.Bind<ManagedFileDialogOptions>().ToConstant(new ManagedFileDialogOptions { AllowDirectorySelection = true });
+			.Bind<ManagedFileDialogOptions>()
+			.ToConstant(new ManagedFileDialogOptions { AllowDirectorySelection = true });
 
 		_sRenderTimer = renderTimer;
 		_sCompositor = new AvCompositor(platformGraphics);
 	}
 
-	private static PlatformHotkeyConfiguration CreatePlatformHotKeyConfiguration()
-	{
-		return OperatingSystem.IsMacOS()
+	private static PlatformHotkeyConfiguration CreatePlatformHotKeyConfiguration() =>
+		OperatingSystem.IsMacOS()
 			? new PlatformHotkeyConfiguration(KeyModifiers.Meta, wholeWordTextActionModifiers: KeyModifiers.Alt)
 			: new PlatformHotkeyConfiguration(KeyModifiers.Control);
-	}
 
 	public static void TriggerRenderTick()
 	{

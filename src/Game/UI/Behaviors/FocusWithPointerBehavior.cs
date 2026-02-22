@@ -32,8 +32,5 @@ public sealed class FocusWithPointerBehavior : Behavior<InputElement>
 		base.OnDetaching();
 	}
 
-	private void OnPointerEntered(object? sender, PointerEventArgs e)
-	{
-		(Target ?? AssociatedObject)?.Focus();
-	}
+	private void OnPointerEntered(object? sender, PointerEventArgs e) => (Target ?? AssociatedObject)?.Focus();
 }

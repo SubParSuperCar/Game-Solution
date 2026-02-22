@@ -19,10 +19,7 @@ public sealed class ViewLocator : IDataTemplate
 		[typeof(OptionsViewModel)] = new ViewFactory(() => new OptionsView())
 	};
 
-	public bool Match(object? data)
-	{
-		return data is ViewModel;
-	}
+	public bool Match(object? data) => data is ViewModel;
 
 	public Control? Build(object? param)
 	{
@@ -34,9 +31,8 @@ public sealed class ViewLocator : IDataTemplate
 			: CreateViewNotFound(viewModelType);
 	}
 
-	private static TextBlock CreateViewNotFound(Type viewModelType)
-	{
-		return new TextBlock
+	private static TextBlock CreateViewNotFound(Type viewModelType) =>
+		new()
 		{
 			Text = $"No view registered for viewmodel type\n{viewModelType}",
 			HorizontalAlignment = HorizontalAlignment.Center,
@@ -44,17 +40,14 @@ public sealed class ViewLocator : IDataTemplate
 			Margin = new Thickness(8.0),
 			Foreground = Brushes.Red
 		};
-	}
 
 	private sealed class ViewFactory(Func<View> createView, bool cached = false)
 	{
 		private View? _cachedView;
 
-		public View GetOrCreateView()
-		{
-			return cached
+		public View GetOrCreateView() =>
+			cached
 				? _cachedView ??= createView()
 				: createView();
-		}
 	}
 }

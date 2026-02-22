@@ -53,9 +53,7 @@
 								Content="{TemplateBinding Content}"
 								ContentTemplate="{TemplateBinding ContentTemplate}"
 								RecognizesAccessKey="True" />
-
 						</DockPanel>
-
 					</Border>
 				</Border>
 			</ControlTemplate>
@@ -85,12 +83,12 @@
 					<KeyFrame Cue="0%">
 						<Setter Property="Background" Value="{StaticResource ButtonFocusBackgroundBrush}" />
 					</KeyFrame>
+
 					<KeyFrame Cue="100%">
 						<Setter Property="Background" Value="{StaticResource ButtonNormalBackgroundBrush}" />
 					</KeyFrame>
 				</Animation>
 			</Style.Animations>
-
 		</Style>
 
 		<Style Selector="^ /template/ Border#Border">
@@ -112,9 +110,6 @@
 				<Setter Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
 				<Setter Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
 			</Style>
-
 		</Style>
-
 	</ControlTheme>
-
 </ResourceDictionary>

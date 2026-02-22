@@ -20,7 +20,7 @@ public sealed partial class UserInterface : AvaloniaControl
 
 		_uiOptions = new UiOptions
 		{
-			UIScale = RenderScaling,
+			UiScale = RenderScaling,
 			VSync = DisplayServer.WindowGetVsyncMode() != DisplayServer.VSyncMode.Disabled,
 			Fullscreen = DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen
 		};
@@ -56,8 +56,8 @@ public sealed partial class UserInterface : AvaloniaControl
 				DisplayServer.WindowSetMode(windowMode);
 				break;
 
-			case nameof(UiOptions.UIScale):
-				RenderScaling = _uiOptions.UIScale;
+			case nameof(UiOptions.UiScale):
+				RenderScaling = _uiOptions.UiScale;
 				break;
 		}
 	}

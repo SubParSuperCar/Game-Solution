@@ -12,14 +12,11 @@ internal sealed class BclStorageFile(FileInfo fileInfo) : IStorageBookmarkFile
 
 	private FileInfo FileInfo { get; } = fileInfo;
 
-	public string Name
-		=> FileInfo.Name;
+	public string Name => FileInfo.Name;
 
-	public bool CanBookmark
-		=> true;
+	public bool CanBookmark => true;
 
-	public Uri Path
-		=> _path ??= BuildPath();
+	public Uri Path => _path ??= BuildPath();
 
 	public Task<StorageItemProperties> GetBasicPropertiesAsync()
 	{
@@ -39,10 +36,7 @@ internal sealed class BclStorageFile(FileInfo fileInfo) : IStorageBookmarkFile
 		return Task.FromResult<IStorageFolder?>(storageFolder);
 	}
 
-	public Task<Stream> OpenReadAsync()
-	{
-		return Task.FromResult<Stream>(FileInfo.OpenRead());
-	}
+	public Task<Stream> OpenReadAsync() => Task.FromResult<Stream>(FileInfo.OpenRead());
 
 	public Task<Stream> OpenWriteAsync()
 	{
@@ -50,15 +44,9 @@ internal sealed class BclStorageFile(FileInfo fileInfo) : IStorageBookmarkFile
 		return Task.FromResult<Stream>(stream);
 	}
 
-	public Task<string?> SaveBookmarkAsync()
-	{
-		return Task.FromResult<string?>(FileInfo.FullName);
-	}
+	public Task<string?> SaveBookmarkAsync() => Task.FromResult<string?>(FileInfo.FullName);
 
-	public Task ReleaseBookmarkAsync()
-	{
-		return Task.CompletedTask;
-	}
+	public Task ReleaseBookmarkAsync() => Task.CompletedTask;
 
 	public Task DeleteAsync()
 	{
@@ -70,6 +58,7 @@ internal sealed class BclStorageFile(FileInfo fileInfo) : IStorageBookmarkFile
 	{
 		if (destination is not BclStorageFolder storageFolder)
 			return Task.FromResult<IStorageItem?>(null);
+
 		var newPath = System.IO.Path.Combine(storageFolder.DirectoryInfo.FullName, FileInfo.Name);
 		FileInfo.MoveTo(newPath);
 

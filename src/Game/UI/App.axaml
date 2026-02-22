@@ -22,7 +22,6 @@
 
 	<Application.Styles>
 		<Styles>
-
 			<SimpleTheme />
 
 			<StyleInclude Source="Theme/_Styles.axaml" />
@@ -32,8 +31,6 @@
 				<Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />
 				<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
 			</Style>
-
 		</Styles>
 	</Application.Styles>
-
 </Application>

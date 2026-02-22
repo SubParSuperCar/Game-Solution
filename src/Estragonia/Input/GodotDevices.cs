@@ -13,21 +13,19 @@ public static class GodotDevices
 	private static readonly ConcurrentDictionary<int, IJoypadDevice> SJoypadById = new();
 
 	/// <summary>Gets the keyboard device.</summary>
-	/// <remarks>At this time, we don't support multiple keyboard devices since Avalonia needs a single one for focus management.</remarks>
+	/// <remarks>
+	///     At this time, we don't support multiple keyboard devices since Avalonia needs a single one for focus
+	///     management.
+	/// </remarks>
 	public static IKeyboardDevice Keyboard { get; } = new KeyboardDevice();
 
 	/// <summary>Gets a mouse device for a given Godot device identifier.</summary>
 	/// <param name="deviceId">The device identifier.</param>
 	/// <returns>A mouse device.</returns>
-	public static IMouseDevice GetMouse(int deviceId)
-	{
-		return SMouseById.GetOrAdd(deviceId, static id => new MouseDevice(new Pointer(id, PointerType.Mouse, id == 0)));
-	}
+	public static IMouseDevice GetMouse(int deviceId) => SMouseById.GetOrAdd(deviceId,
+		static id => new MouseDevice(new Pointer(id, PointerType.Mouse, id == 0)));
 
 	/// <summary>Gets a joypad device for a given Godot device identifier.</summary>
 	/// <returns>A joypad device.</returns>
-	public static IJoypadDevice GetJoypad(int deviceId)
-	{
-		return SJoypadById.GetOrAdd(deviceId, new JoypadDevice());
-	}
+	public static IJoypadDevice GetJoypad(int deviceId) => SJoypadById.GetOrAdd(deviceId, new JoypadDevice());
 }

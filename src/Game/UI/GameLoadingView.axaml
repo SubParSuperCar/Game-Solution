@@ -25,9 +25,8 @@
 	<!-- ReSharper disable once Xaml.StyleClassNotFound -->
 	<Border Classes="centered-view-content" VerticalAlignment="Center">
 		<StackPanel>
-
 			<TextBlock
-				Text="Loading..."
+				Text="Loading…"
 				TextAlignment="Center"
 				Margin="8,8,8,0" />
 
@@ -38,8 +37,6 @@
 				Value="{Binding LoadingProgress}"
 				ShowProgressText="True"
 				Margin="8" />
-
 		</StackPanel>
 	</Border>
-
 </ui:View>

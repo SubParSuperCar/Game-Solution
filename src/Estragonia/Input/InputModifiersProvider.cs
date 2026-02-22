@@ -92,12 +92,10 @@ internal static class InputModifiersProvider
 		return modifiers;
 	}
 
-	public static KeyModifiers GetKeyModifiers(this InputEvent inputEvent)
-	{
-		return inputEvent is InputEventWithModifiers inputEventWithModifiers
+	public static KeyModifiers GetKeyModifiers(this InputEvent inputEvent) =>
+		inputEvent is InputEventWithModifiers inputEventWithModifiers
 			? inputEventWithModifiers.GetKeyModifiers()
 			: GetKeyModifiers();
-	}
 
 	private static KeyModifiers GetKeyModifiers(this InputEventWithModifiers inputEvent)
 	{

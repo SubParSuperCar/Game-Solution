@@ -49,23 +49,11 @@ internal sealed class GodotDispatcherImpl : IDispatcherImpl
 		_timer.Change(interval, Timeout.Infinite);
 	}
 
-	public void Signal()
-	{
-		GdDispatcher.SynchronizationContext.Post(_invokeSignaled, this);
-	}
+	public void Signal() => GdDispatcher.SynchronizationContext.Post(_invokeSignaled, this);
 
-	private void OnTimerTick(object? state)
-	{
-		GdDispatcher.SynchronizationContext.Post(_invokeTimer, null);
-	}
+	private void OnTimerTick(object? state) => GdDispatcher.SynchronizationContext.Post(_invokeTimer, null);
 
-	private void InvokeSignaled(object? state)
-	{
-		Signaled?.Invoke();
-	}
+	private void InvokeSignaled(object? state) => Signaled?.Invoke();
 
-	private void InvokeTimer(object? state)
-	{
-		Timer?.Invoke();
-	}
+	private void InvokeTimer(object? state) => Timer?.Invoke();
 }

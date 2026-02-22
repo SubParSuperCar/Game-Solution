@@ -25,7 +25,6 @@
 	</Design.DataContext>
 
 	<ui:View.Styles>
-
 		<Style Selector="Panel.title > TextBlock">
 			<Setter Property="Text" Value="Certain Game" />
 			<Setter Property="FontSize" Value="{StaticResource MainTitleFontSize}" />
@@ -38,7 +37,6 @@
 			<Setter Property="Padding" Value="24,12" />
 			<Setter Property="FontWeight" Value="Bold" />
 		</Style>
-
 	</ui:View.Styles>
 
 	<ui:View.DirectionalFocusStructure>
@@ -51,7 +49,6 @@
 	</ui:View.DirectionalFocusStructure>
 
 	<Grid RowDefinitions="Auto,*,Auto">
-
 		<!-- Title -->
 		<Panel
 			Classes="title"
@@ -66,7 +63,6 @@
 			<TextBlock
 				Foreground="#FFFFBC27"
 				Margin="0" />
-
 		</Panel>
 
 		<!-- Menu -->
@@ -100,7 +96,6 @@
 					controls:AdditionalContent.Geometry="{StaticResource ExitGeometry}"
 					Command="{Binding ExitCommand}"
 					IsCancel="True" />
-
 			</StackPanel>
 		</ScrollViewer>
 
@@ -111,7 +106,5 @@
 			HorizontalAlignment="Center"
 			Margin="8"
 			Grid.Row="2" />
-
 	</Grid>
-
 </ui:View>

@@ -6,6 +6,7 @@
 		<Border Background="Black" Width="400" Height="400" Padding="0">
 			<StackPanel>
 				<TextBlock Classes="view-title" Text="Title" />
+
 				<Border Classes="selectable" MinWidth="200" Margin="8,0">
 					<TextBlock Text="Item" />
 				</Border>
@@ -39,5 +40,4 @@
 		<Setter Property="Background" Value="{StaticResource ContainerFocusBackgroundBrush}" />
 		<Setter Property="BorderBrush" Value="{StaticResource ContainerFocusBorderBrush}" />
 	</Style>
-
 </Styles>

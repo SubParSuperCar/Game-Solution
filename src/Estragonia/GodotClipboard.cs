@@ -9,10 +9,7 @@ namespace Estragonia;
 /// <summary>An implementation of <see cref="IClipboard" /> that uses Godot clipboard methods.</summary>
 internal sealed class GodotClipboard : IClipboard
 {
-	public Task<string?> GetTextAsync()
-	{
-		return Task.FromResult<string?>(DisplayServer.ClipboardGet());
-	}
+	public Task<string?> GetTextAsync() => Task.FromResult<string?>(DisplayServer.ClipboardGet());
 
 	public Task SetTextAsync(string? text)
 	{
@@ -20,33 +17,15 @@ internal sealed class GodotClipboard : IClipboard
 		return Task.CompletedTask;
 	}
 
-	public Task ClearAsync()
-	{
-		return SetTextAsync(string.Empty);
-	}
+	public Task ClearAsync() => SetTextAsync(string.Empty);
 
-	public Task FlushAsync()
-	{
-		return Task.CompletedTask;
-	}
+	public Task FlushAsync() => Task.CompletedTask;
 
-	public Task SetDataObjectAsync(IDataObject data)
-	{
-		return Task.CompletedTask;
-	}
+	public Task SetDataObjectAsync(IDataObject data) => Task.CompletedTask;
 
-	public Task<string[]> GetFormatsAsync()
-	{
-		return Task.FromResult(Array.Empty<string>());
-	}
+	public Task<string[]> GetFormatsAsync() => Task.FromResult(Array.Empty<string>());
 
-	public Task<object?> GetDataAsync(string format)
-	{
-		return Task.FromResult<object?>(null);
-	}
+	public Task<object?> GetDataAsync(string format) => Task.FromResult<object?>(null);
 
-	public Task<IDataObject?> TryGetInProcessDataObjectAsync()
-	{
-		return Task.FromResult<IDataObject?>(null);
-	}
+	public Task<IDataObject?> TryGetInProcessDataObjectAsync() => Task.FromResult<IDataObject?>(null);
 }

@@ -22,12 +22,14 @@
 		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
 		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
 		<Setter Property="ScrollViewer.IsScrollChainingEnabled" Value="True" />
+
 		<Setter Property="Template">
 			<ControlTemplate>
 				<Border
 					BorderBrush="{TemplateBinding BorderBrush}"
 					BorderThickness="{TemplateBinding BorderThickness}"
 					CornerRadius="{TemplateBinding CornerRadius}">
+
 					<ScrollViewer
 						x:Name="PART_ScrollViewer"
 						AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}"
@@ -38,6 +40,7 @@
 						VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
 						VerticalSnapPointsType="{TemplateBinding (ScrollViewer.VerticalSnapPointsType)}"
 						HorizontalSnapPointsType="{TemplateBinding (ScrollViewer.HorizontalSnapPointsType)}">
+
 						<ItemsPresenter
 							x:Name="PART_ItemsPresenter"
 							Margin="{TemplateBinding Padding}"

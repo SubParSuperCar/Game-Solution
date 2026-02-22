@@ -56,9 +56,6 @@ public sealed partial class GameLoadingViewModel(INavigator navigator) : ViewMod
 
 	private sealed class SceneLoadProgress(GameLoadingViewModel owner) : IProgress<double>
 	{
-		public void Report(double value)
-		{
-			owner.LoadingProgress = value * RealProgressRatio;
-		}
+		public void Report(double value) => owner.LoadingProgress = value * RealProgressRatio;
 	}
 }

@@ -31,9 +31,7 @@
 	</ui:View.Resources>
 
 	<ui:View.Styles>
-
 		<Style Selector="Border.option > Grid">
-
 			<Setter Property="Margin" Value="0,0,-16,0" />
 
 			<Style Selector="^ > TextBlock.label">
@@ -51,9 +49,7 @@
 				<Setter Property="VerticalAlignment" Value="Center" />
 				<Setter Property="Grid.Column" Value="2" />
 			</Style>
-
 		</Style>
-
 	</ui:View.Styles>
 
 	<ui:View.DirectionalFocusStructure>
@@ -68,9 +64,7 @@
 	</ui:View.DirectionalFocusStructure>
 
 	<!-- ReSharper disable Xaml.MissingGridIndex -->
-
 	<Grid RowDefinitions="Auto,*,Auto">
-
 		<!-- ReSharper disable Xaml.StyleClassNotFound -->
 		<TextBlock
 			Classes="view-title"
@@ -79,19 +73,15 @@
 
 		<!-- Options -->
 		<Border Classes="centered-view-content" Grid.Row="1">
-
 			<ScrollViewer>
 				<StackPanel Spacing="2" Margin="4">
-
 					<!-- Vertical Sync -->
 					<Border Classes="selectable option">
-
 						<Interaction.Behaviors>
 							<behaviors:FocusWithPointerBehavior Target="{Binding #VSyncCheckBox}" />
 						</Interaction.Behaviors>
 
 						<Grid ColumnDefinitions="3*,*,*">
-
 							<TextBlock
 								Classes="label"
 								Text="V-Sync" />
@@ -106,20 +96,16 @@
 								IsChecked="{Binding VSync, Mode=TwoWay}"
 								HorizontalAlignment="Center"
 								Padding="0" />
-
 						</Grid>
-
 					</Border>
 
 					<!-- Fullscreen -->
 					<Border Classes="selectable option">
-
 						<Interaction.Behaviors>
 							<behaviors:FocusWithPointerBehavior Target="{Binding #FullscreenCheckBox}" />
 						</Interaction.Behaviors>
 
 						<Grid ColumnDefinitions="3*,*,*">
-
 							<TextBlock
 								Classes="label"
 								Text="Fullscreen" />
@@ -134,20 +120,16 @@
 								IsChecked="{Binding Fullscreen, Mode=TwoWay}"
 								HorizontalAlignment="Center"
 								Padding="0" />
-
 						</Grid>
-
 					</Border>
 
 					<!-- Show FPS -->
 					<Border Classes="selectable option">
-
 						<Interaction.Behaviors>
 							<behaviors:FocusWithPointerBehavior Target="{Binding #ShowFpsCheckBox}" />
 						</Interaction.Behaviors>
 
 						<Grid ColumnDefinitions="3*,*,*">
-
 							<TextBlock
 								Classes="label"
 								Text="Show FPS" />
@@ -162,33 +144,29 @@
 								IsChecked="{Binding ShowFps, Mode=TwoWay}"
 								HorizontalAlignment="Center"
 								Padding="0" />
-
 						</Grid>
-
 					</Border>
 
 					<!-- UI Scale -->
 					<Border Classes="selectable option">
 						<!-- ReSharper restore Xaml.StyleClassNotFound -->
-
 						<Interaction.Behaviors>
 							<behaviors:FocusWithPointerBehavior Target="{Binding #UiScaleSlider}" />
 						</Interaction.Behaviors>
 
 						<Grid ColumnDefinitions="3*,*,*">
-
 							<TextBlock
 								Classes="label"
 								Text="UI Scale" />
 
 							<TextBlock
 								Classes="value-display"
-								Text="{Binding UIScale, StringFormat=P0}" />
+								Text="{Binding UiScale, StringFormat=P0}" />
 
 							<controls:ExtendedSlider
 								x:Name="UiScaleSlider"
 								Classes="value"
-								Value="{Binding UIScale, Mode=TwoWay}"
+								Value="{Binding UiScale, Mode=TwoWay}"
 								Minimum="0.6"
 								Maximum="2.0"
 								SmallChange="0.1"
@@ -196,14 +174,10 @@
 								TickFrequency="0.1"
 								IsSnapToTickEnabled="True"
 								Margin="16,0" />
-
 						</Grid>
-
 					</Border>
-
 				</StackPanel>
 			</ScrollViewer>
-
 		</Border>
 
 		<!-- Buttons -->
@@ -233,11 +207,7 @@
 					<behaviors:FocusWithPointerBehavior />
 					<behaviors:MoveFocusWhenDisabledBehavior Target="{Binding #CloseButton}" />
 				</Interaction.Behaviors>
-
 			</Button>
-
 		</StackPanel>
-
 	</Grid>
-
 </ui:View>

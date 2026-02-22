@@ -7,14 +7,14 @@ internal sealed class JoypadDevice : IJoypadDevice
 {
 	public void ProcessRawEvent(RawInputEventArgs ev)
 	{
-		if (ev.Handled)
-			return;
+		if (ev.Handled) return;
 
 		switch (ev)
 		{
 			case RawJoypadButtonEventArgs buttonArgs:
 				ProcessButtonEvent(buttonArgs);
 				break;
+
 			case RawJoypadAxisEventArgs axisArgs:
 				ProcessAxisEvent(axisArgs);
 				break;
@@ -30,8 +30,7 @@ internal sealed class JoypadDevice : IJoypadDevice
 			_ => null
 		};
 
-		if (routedEvent is null)
-			return;
+		if (routedEvent is null) return;
 
 		var element = rawArgs.Root.FocusManager?.GetFocusedElement() ?? rawArgs.Root;
 		var args = new JoypadButtonEventArgs(routedEvent, element);

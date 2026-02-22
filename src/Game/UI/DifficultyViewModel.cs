@@ -12,10 +12,7 @@ public sealed partial class DifficultyViewModel(INavigator navigator) : ViewMode
 
 	public ObservableCollection<GameDifficulty> Difficulties { get; } = new(Enum.GetValues<GameDifficulty>());
 
-	protected override Task LoadAsync()
-	{
-		return Task.CompletedTask;
-	}
+	protected override Task LoadAsync() => Task.CompletedTask;
 
 	[RelayCommand]
 	private async Task StartGameAsync()

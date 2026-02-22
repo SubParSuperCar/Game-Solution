@@ -40,10 +40,7 @@ public sealed partial class MainViewModel(UiOptions uiOptions) : ViewModel, INav
 		}
 	}
 
-	public void Quit()
-	{
-		SceneTree?.Quit();
-	}
+	public void Quit() => SceneTree?.Quit();
 
 	protected override async Task<bool> TryCloseCoreAsync()
 	{
@@ -54,10 +51,8 @@ public sealed partial class MainViewModel(UiOptions uiOptions) : ViewModel, INav
 		return true;
 	}
 
-	private async Task<bool> TryCloseCurrentAsync()
-	{
-		return CurrentViewModel is { } viewModel && await viewModel.TryCloseAsync();
-	}
+	private async Task<bool> TryCloseCurrentAsync() =>
+		CurrentViewModel is { } viewModel && await viewModel.TryCloseAsync();
 
 	protected override Task LoadAsync()
 	{

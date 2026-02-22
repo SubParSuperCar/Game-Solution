@@ -71,6 +71,7 @@ internal sealed class MtlSynchronizer : ISurfaceSynchronizer
 				surface.Width,
 				surface.Height
 			);
+
 		GD.PrintErr("[Estragonia Metal] Could not get Skia Metal texture");
 		return false;
 
@@ -94,6 +95,7 @@ internal sealed class MtlSynchronizer : ISurfaceSynchronizer
 
 		if (!skSurface.ReadPixels(imageInfo, bitmap.GetPixels(), imageInfo.RowBytes, 0, 0))
 			return;
+
 		// Get pixel data and upload to Godot texture
 		var pixelData = bitmap.GetPixelSpan().ToArray();
 		surface.RenderingDevice.TextureUpdate(

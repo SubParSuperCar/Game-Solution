@@ -27,8 +27,8 @@
 					BorderBrush="{TemplateBinding BorderBrush}"
 					BorderThickness="{TemplateBinding BorderThickness}"
 					CornerRadius="{TemplateBinding CornerRadius}">
-					<Grid ColumnDefinitions="Auto,*">
 
+					<Grid ColumnDefinitions="Auto,*">
 						<Border
 							x:Name="CheckBorder"
 							Background="{StaticResource ButtonNormalBackgroundBrush}"
@@ -44,7 +44,6 @@
 							      Stretch="Uniform"
 							      VerticalAlignment="Center"
 							      Opacity="0" />
-
 						</Border>
 
 						<ContentPresenter
@@ -55,7 +54,6 @@
 							HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 							VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 							Grid.Column="1" />
-
 					</Grid>
 				</Border>
 			</ControlTemplate>
@@ -98,7 +96,5 @@
 			<Setter Property="Opacity" Value="1.0" />
 			<Setter Property="Margin" Value="3" />
 		</Style>
-
 	</ControlTheme>
-
 </ResourceDictionary>

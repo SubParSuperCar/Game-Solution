@@ -32,6 +32,7 @@ internal static class GodotPlatformGraphicsFactory
 		var settings = ProjectSettings.Singleton;
 		if (!settings.HasSetting("rendering/rendering_device/driver.macos"))
 			return true;
+
 		var macosDriver = settings.GetSetting("rendering/rendering_device/driver.macos").AsString();
 		return macosDriver != "vulkan";
 		// User explicitly wants Vulkan (via MoltenVK)

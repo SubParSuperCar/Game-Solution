@@ -15,7 +15,6 @@
 		</Style>
 	</Design.DesignStyle>
 
-
 	<ui:View.DirectionalFocusStructure>
 		<ui:DirectionalFocusStructure>
 			<ui:DirectionalFocusControl Control="{Binding #CloseButton}" IsNewRow="True" IsRowDefault="True" />
@@ -23,12 +22,12 @@
 	</ui:View.DirectionalFocusStructure>
 
 	<Grid RowDefinitions="*,2*">
-
 		<!-- ReSharper disable once Xaml.StyleClassNotFound -->
 		<Border
 			Classes="centered-view-content"
 			VerticalAlignment="Center"
 			Grid.Row="0">
+
 			<TextBlock
 				Text="Sorry, there's no game, you'll have to develop that yourself 😎"
 				TextAlignment="Center"
@@ -46,7 +45,5 @@
 			HorizontalAlignment="Right"
 			VerticalAlignment="Bottom"
 			Grid.Row="1" />
-
 	</Grid>
-
 </ui:View>

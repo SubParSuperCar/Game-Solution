@@ -7,19 +7,15 @@ namespace Game.UI;
 
 internal static class Designer
 {
-	public static int Main()
-	{
+	public static int Main() =>
 		throw new NotSupportedException("This project isn't meant to be run: it's only for Avalonia designer support.");
-	}
 
 	// Used by designer
 	// ReSharper disable once UnusedMember.Global
-	public static AppBuilder BuildAvaloniaApp()
-	{
-		return AppBuilder
+	public static AppBuilder BuildAvaloniaApp() =>
+		AppBuilder
 			.Configure<App>()
 			.UseSkia();
-	}
 }
 
 #endif

@@ -36,10 +36,8 @@ public abstract class View : UserControl
 		base.OnGotFocus(e);
 	}
 
-	private Control? TryGetFirstFocusableChild()
-	{
-		return AdjustFocusTarget(DirectionalFocusStructure?.GetDown(null), ListBoxFocusMode.SelectedItem);
-	}
+	private Control? TryGetFirstFocusableChild() =>
+		AdjustFocusTarget(DirectionalFocusStructure?.GetDown(null), ListBoxFocusMode.SelectedItem);
 
 	private void FocusDirectional(Func<Control?, Control?> findNext)
 	{
@@ -62,14 +60,11 @@ public abstract class View : UserControl
 		if (control is ExtendedListBox listBox)
 			return listBoxFocusMode switch
 			{
-				ListBoxFocusMode.FirstItem
-					=> listBox.GetRealizedContainers().FirstOrDefault(),
-				ListBoxFocusMode.LastItem
-					=> listBox.GetRealizedContainers().LastOrDefault(),
-				ListBoxFocusMode.SelectedItem
-					=> listBox.ContainerFromIndex(listBox.SelectedIndex) ?? listBox.GetRealizedContainers().FirstOrDefault(),
-				_
-					=> throw new ArgumentOutOfRangeException(nameof(listBoxFocusMode), listBoxFocusMode, null)
+				ListBoxFocusMode.FirstItem => listBox.GetRealizedContainers().FirstOrDefault(),
+				ListBoxFocusMode.LastItem => listBox.GetRealizedContainers().LastOrDefault(),
+				ListBoxFocusMode.SelectedItem => listBox.ContainerFromIndex(listBox.SelectedIndex)
+				                                 ?? listBox.GetRealizedContainers().FirstOrDefault(),
+				_ => throw new ArgumentOutOfRangeException(nameof(listBoxFocusMode), listBoxFocusMode, null)
 			};
 
 		return control;

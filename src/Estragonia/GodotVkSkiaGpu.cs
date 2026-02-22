@@ -31,7 +31,8 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 			throw new NotSupportedException("Estragonia is only supported on Vulkan renderers (Forward+ or Mobile)");
 
 		var vkInstance = new VkInstance(GetIntPtrDriverResource(RenderingDevice.DriverResource.TopmostObject));
-		var vkPhysicalDevice = new VkPhysicalDevice(GetIntPtrDriverResource(RenderingDevice.DriverResource.PhysicalDevice));
+		var vkPhysicalDevice =
+			new VkPhysicalDevice(GetIntPtrDriverResource(RenderingDevice.DriverResource.PhysicalDevice));
 		var vkDevice = new VkDevice(GetIntPtrDriverResource(RenderingDevice.DriverResource.LogicalDevice));
 		var vkQueue = new VkQueue(GetIntPtrDriverResource(RenderingDevice.DriverResource.CommandQueue));
 		var vkQueueFamilyIndex =
@@ -43,8 +44,10 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 		var vkGetInstanceProcAddr =
 			(delegate* unmanaged[Stdcall]<VkInstance, byte*, IntPtr>)NativeLibrary.GetExport(vkLibrary,
 				"vkGetInstanceProcAddr");
+
 		var vkGetDeviceProcAddr =
-			(delegate* unmanaged[Stdcall]<VkDevice, byte*, IntPtr>)NativeLibrary.GetExport(vkLibrary, "vkGetDeviceProcAddr");
+			(delegate* unmanaged[Stdcall]<VkDevice, byte*, IntPtr>)NativeLibrary.GetExport(vkLibrary,
+				"vkGetDeviceProcAddr");
 
 		var deviceApi = new VkDeviceApi(vkDevice, vkGetDeviceProcAddr);
 
@@ -98,22 +101,14 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 	public bool IsLost
 		=> _grContext.IsAbandoned;
 
-	object? IOptionalFeatureProvider.TryGetFeature(Type featureType)
-	{
-		return null;
-	}
+	object? IOptionalFeatureProvider.TryGetFeature(Type featureType) => null;
 
-	IDisposable IPlatformGraphicsContext.EnsureCurrent()
-	{
-		return EmptyDisposable.Instance;
-	}
+	IDisposable IPlatformGraphicsContext.EnsureCurrent() => EmptyDisposable.Instance;
 
-	ISkiaGpuRenderTarget? ISkiaGpu.TryCreateRenderTarget(IEnumerable<object> surfaces)
-	{
-		return surfaces.OfType<GodotSkiaSurface>().FirstOrDefault() is { } surface
+	ISkiaGpuRenderTarget? ISkiaGpu.TryCreateRenderTarget(IEnumerable<object> surfaces) =>
+		surfaces.OfType<GodotSkiaSurface>().FirstOrDefault() is { } surface
 			? new GodotSkiaRenderTarget(surface, _grContext, _barrierHelper)
 			: null;
-	}
 
 	public IGodotSkiaSurface CreateSurface(PixelSize size, double renderScaling)
 	{
@@ -137,12 +132,14 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 
 		var gdRdTexture = _renderingDevice.TextureCreate(gdRdTextureFormat, new RDTextureView());
 
-		var vkImage = new VkImage(_renderingDevice.GetDriverResource(RenderingDevice.DriverResource.Texture, gdRdTexture, 0UL));
+		var vkImage =
+			new VkImage(_renderingDevice.GetDriverResource(RenderingDevice.DriverResource.Texture, gdRdTexture, 0UL));
 		if (vkImage.Handle == 0UL)
 			throw new InvalidOperationException("Couldn't get Vulkan image from Godot texture");
 
 		var vkFormat =
-			(uint)_renderingDevice.GetDriverResource(RenderingDevice.DriverResource.TextureDataFormat, gdRdTexture, 0UL);
+			(uint)_renderingDevice.GetDriverResource(RenderingDevice.DriverResource.TextureDataFormat, gdRdTexture,
+				0UL);
 		if (vkFormat == 0U)
 			throw new InvalidOperationException("Couldn't get Vulkan format from Godot texture");
 
@@ -196,12 +193,10 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 		return surface;
 	}
 
-	ISkiaSurface? ISkiaGpu.TryCreateSurface(PixelSize size, ISkiaGpuRenderSession? session)
-	{
-		return session is GodotSkiaGpuRenderSession godotSession
+	ISkiaSurface? ISkiaGpu.TryCreateSurface(PixelSize size, ISkiaGpuRenderSession? session) =>
+		session is GodotSkiaGpuRenderSession godotSession
 			? CreateSurface(size, godotSession.Surface.RenderScaling)
 			: null;
-	}
 
 	public void Dispose()
 	{
@@ -219,6 +214,7 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 		if (!OperatingSystem.IsMacOS() && !OperatingSystem.IsIOS())
 			return TryLoadByName("libvulkan.so.1", out handle)
 			       || TryLoadByName("libvulkan.so", out handle);
+
 		// On macOS, Godot bundles MoltenVK statically in the executable.
 		// Try loading from the main program first to avoid conflicts with external MoltenVK.
 		if (TryLoadFromMainProgram(out handle))
@@ -239,6 +235,7 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 		static bool TryLoadFromMainProgram(out IntPtr handle)
 		{
 			handle = NativeLibrary.GetMainProgramHandle();
+
 			// Verify the main program exports Vulkan symbols
 			return handle != IntPtr.Zero
 			       && NativeLibrary.TryGetExport(handle, "vkGetInstanceProcAddr", out _);

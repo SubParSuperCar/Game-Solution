@@ -26,11 +26,15 @@ internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
 			throw new NotSupportedException("Estragonia is only supported on Forward+ or Mobile renderers");
 
 		// Get Metal device and command queue from Godot
-		var mtlDevice = (IntPtr)_renderingDevice.GetDriverResource(RenderingDevice.DriverResource.LogicalDevice, default, 0UL);
+		var mtlDevice =
+			(IntPtr)_renderingDevice.GetDriverResource(RenderingDevice.DriverResource.LogicalDevice, default, 0UL);
+
 		if (mtlDevice == IntPtr.Zero)
 			throw new InvalidOperationException("Godot returned null for Metal device");
 
-		_mtlQueue = (IntPtr)_renderingDevice.GetDriverResource(RenderingDevice.DriverResource.CommandQueue, default, 0UL);
+		_mtlQueue = (IntPtr)_renderingDevice.GetDriverResource(RenderingDevice.DriverResource.CommandQueue, default,
+			0UL);
+
 		if (_mtlQueue == IntPtr.Zero)
 			throw new InvalidOperationException("Godot returned null for Metal command queue");
 
@@ -41,25 +45,16 @@ internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
 		_synchronizer = new MtlSynchronizer();
 	}
 
-	public bool IsLost
-		=> _grContext.IsAbandoned;
+	public bool IsLost => _grContext.IsAbandoned;
 
-	object? IOptionalFeatureProvider.TryGetFeature(Type featureType)
-	{
-		return null;
-	}
+	object? IOptionalFeatureProvider.TryGetFeature(Type featureType) => null;
 
-	IDisposable IPlatformGraphicsContext.EnsureCurrent()
-	{
-		return EmptyDisposable.Instance;
-	}
+	IDisposable IPlatformGraphicsContext.EnsureCurrent() => EmptyDisposable.Instance;
 
-	ISkiaGpuRenderTarget? ISkiaGpu.TryCreateRenderTarget(IEnumerable<object> surfaces)
-	{
-		return surfaces.OfType<GodotSkiaSurfaceMetal>().FirstOrDefault() is { } surface
+	ISkiaGpuRenderTarget? ISkiaGpu.TryCreateRenderTarget(IEnumerable<object> surfaces) =>
+		surfaces.OfType<GodotSkiaSurfaceMetal>().FirstOrDefault() is { } surface
 			? new GodotSkiaRenderTarget(surface, _grContext, _synchronizer)
 			: null;
-	}
 
 	public IGodotSkiaSurface CreateSurface(PixelSize size, double renderScaling)
 	{
@@ -136,12 +131,10 @@ internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
 		);
 	}
 
-	ISkiaSurface? ISkiaGpu.TryCreateSurface(PixelSize size, ISkiaGpuRenderSession? session)
-	{
-		return session is GodotSkiaGpuRenderSession godotSession
+	ISkiaSurface? ISkiaGpu.TryCreateSurface(PixelSize size, ISkiaGpuRenderSession? session) =>
+		session is GodotSkiaGpuRenderSession godotSession
 			? CreateSurface(size, godotSession.Surface.RenderScaling)
 			: null;
-	}
 
 	public void Dispose()
 	{
@@ -165,8 +158,7 @@ internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
 				false,
 				gdMetalTexture);
 
-			if (backendTexture is null)
-				return null;
+			if (backendTexture is null) return null;
 
 			// Create Skia surface that renders directly to Godot's texture
 			var skSurface = SKSurface.Create(
@@ -188,6 +180,7 @@ internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
 					true,
 					backendTexture
 				);
+
 			backendTexture.Dispose();
 			return null;
 		}

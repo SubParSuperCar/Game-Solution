@@ -14,10 +14,7 @@ public abstract partial class ViewModel : ObservableObject
 
 	public event EventHandler? Closed;
 
-	public Task EnsureLoadedAsync()
-	{
-		return _loadTask ??= LoadAsync();
-	}
+	public Task EnsureLoadedAsync() => _loadTask ??= LoadAsync();
 
 	protected abstract Task LoadAsync();
 
@@ -31,15 +28,9 @@ public abstract partial class ViewModel : ObservableObject
 		return true;
 	}
 
-	protected virtual Task<bool> TryCloseCoreAsync()
-	{
-		return Task.FromResult(true);
-	}
+	protected virtual Task<bool> TryCloseCoreAsync() => Task.FromResult(true);
 
-	private void OnClosed()
-	{
-		Closed?.Invoke(this, EventArgs.Empty);
-	}
+	private void OnClosed() => Closed?.Invoke(this, EventArgs.Empty);
 
 	public virtual void ProcessFrame()
 	{

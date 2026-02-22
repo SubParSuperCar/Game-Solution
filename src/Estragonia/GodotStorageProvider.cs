@@ -21,14 +21,12 @@ internal sealed class GodotStorageProvider : IStorageProvider
 	public bool CanPickFolder
 		=> true;
 
-	public Task<IReadOnlyList<IStorageFile>> OpenFilePickerAsync(FilePickerOpenOptions options)
-	{
-		return PickFilesAsync(
+	public Task<IReadOnlyList<IStorageFile>> OpenFilePickerAsync(FilePickerOpenOptions options) =>
+		PickFilesAsync(
 			options,
 			options.AllowMultiple ? FileDialog.FileModeEnum.OpenFiles : FileDialog.FileModeEnum.OpenFile,
 			options.FileTypeFilter
 		);
-	}
 
 	public async Task<IStorageFile?> SaveFilePickerAsync(FilePickerSaveOptions options)
 	{
@@ -42,7 +40,6 @@ internal sealed class GodotStorageProvider : IStorageProvider
 		var dialog = CreateDialog(options, FileDialog.FileModeEnum.OpenDir);
 
 		dialog.DirSelected += OnDirSelected;
-
 		dialog.Show();
 
 		return Task.FromResult<IReadOnlyList<IStorageFolder>>(folders);
@@ -72,6 +69,7 @@ internal sealed class GodotStorageProvider : IStorageProvider
 	{
 		if (!filePath.IsAbsoluteUri)
 			return Task.FromResult<IStorageFile?>(null);
+
 		var fileInfo = new FileInfo(filePath.LocalPath);
 		return fileInfo.Exists
 			? Task.FromResult<IStorageFile?>(new BclStorageFile(fileInfo))
@@ -82,6 +80,7 @@ internal sealed class GodotStorageProvider : IStorageProvider
 	{
 		if (!folderPath.IsAbsoluteUri)
 			return Task.FromResult<IStorageFolder?>(null);
+
 		var folderInfo = new DirectoryInfo(folderPath.LocalPath);
 		return folderInfo.Exists
 			? Task.FromResult<IStorageFolder?>(new BclStorageFolder(folderInfo))
@@ -152,9 +151,8 @@ internal sealed class GodotStorageProvider : IStorageProvider
 		}
 	}
 
-	private static FileDialog CreateDialog(PickerOptions options, FileDialog.FileModeEnum fileMode)
-	{
-		return new FileDialog
+	private static FileDialog CreateDialog(PickerOptions options, FileDialog.FileModeEnum fileMode) =>
+		new()
 		{
 			Access = FileDialog.AccessEnum.Filesystem,
 			CurrentDir = options.SuggestedStartLocation?.TryGetLocalPath(),
@@ -165,5 +163,4 @@ internal sealed class GodotStorageProvider : IStorageProvider
 			Transient = true,
 			UseNativeDialog = true
 		};
-	}
 }

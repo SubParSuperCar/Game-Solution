@@ -65,10 +65,7 @@ public class DirectionalFocusStructure : AvaloniaObject
 	///     - If the next row has a default control, returns it.
 	///     - Otherwise, returns the first control in the next row.
 	/// </summary>
-	public Control? GetDown(Control? anchor)
-	{
-		return Structure.GetDown(anchor);
-	}
+	public Control? GetDown(Control? anchor) => Structure.GetDown(anchor);
 
 	/// <summary>
 	///     Gets the control to the top of the anchor:
@@ -76,30 +73,21 @@ public class DirectionalFocusStructure : AvaloniaObject
 	///     - If the previous row has a default control, returns it.
 	///     - Otherwise returns the last control in the previous row.
 	/// </summary>
-	public Control? GetUp(Control? anchor)
-	{
-		return Structure.GetUp(anchor);
-	}
+	public Control? GetUp(Control? anchor) => Structure.GetUp(anchor);
 
 	/// <summary>
 	///     Gets the control to the right of the anchor:
 	///     - If the anchor is null, returns the first control in the grid.
 	///     - If there's a control to the right in the same row as the anchor, returns it.
 	/// </summary>
-	public Control? GetRight(Control? anchor)
-	{
-		return Structure.GetRight(anchor);
-	}
+	public Control? GetRight(Control? anchor) => Structure.GetRight(anchor);
 
 	/// <summary>
 	///     Gets the control to the left of the anchor:
 	///     - If the anchor is null, returns null.
 	///     - If there's a control to the left in the same row as the anchor, returns it.
 	/// </summary>
-	public Control? GetLeft(Control? anchor)
-	{
-		return Structure.GetLeft(anchor);
-	}
+	public Control? GetLeft(Control? anchor) => Structure.GetLeft(anchor);
 
 	private readonly struct BuiltStructure(Row[] rows)
 	{
@@ -119,19 +107,15 @@ public class DirectionalFocusStructure : AvaloniaObject
 			return FindPreviousValidControl(rowIndex - 1);
 		}
 
-		public Control? GetRight(Control? anchor)
-		{
-			return FindControl(anchor) is var (rowIndex, controlIndex)
+		public Control? GetRight(Control? anchor) =>
+			FindControl(anchor) is var (rowIndex, controlIndex)
 				? rows[rowIndex].FindNextValidControl(controlIndex + 1)
 				: FindNextValidControl(0);
-		}
 
-		public Control? GetLeft(Control? anchor)
-		{
-			return FindControl(anchor) is var (rowIndex, controlIndex)
+		public Control? GetLeft(Control? anchor) =>
+			FindControl(anchor) is var (rowIndex, controlIndex)
 				? rows[rowIndex].FindPreviousValidControl(controlIndex - 1)
 				: FindPreviousValidControl(rows.Length - 1);
-		}
 
 		private (int rowIndex, int controlIndex)? FindControl(Control? control)
 		{
@@ -179,15 +163,9 @@ public class DirectionalFocusStructure : AvaloniaObject
 		public int Count
 			=> controls.Length;
 
-		public int IndexOf(Control control)
-		{
-			return Array.IndexOf(controls, control);
-		}
+		public int IndexOf(Control control) => Array.IndexOf(controls, control);
 
-		public Control? TryGetValidDefaultControl()
-		{
-			return IsValidControl(defaultControl) ? defaultControl : null;
-		}
+		public Control? TryGetValidDefaultControl() => IsValidControl(defaultControl) ? defaultControl : null;
 
 		public Control? FindNextValidControl(int startIndex)
 		{
@@ -207,9 +185,7 @@ public class DirectionalFocusStructure : AvaloniaObject
 			return null;
 		}
 
-		private static bool IsValidControl(Control? control)
-		{
-			return control is { IsEffectivelyVisible: true, IsEffectivelyEnabled: true };
-		}
+		private static bool IsValidControl(Control? control) =>
+			control is { IsEffectivelyVisible: true, IsEffectivelyEnabled: true };
 	}
 }

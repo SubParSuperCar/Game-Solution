@@ -19,6 +19,7 @@
 		<Setter Property="BorderThickness" Value="1" />
 		<Setter Property="Padding" Value="16" />
 		<Setter Property="Margin" Value="0,2,0,0" />
+
 		<Setter Property="Template">
 			<ControlTemplate>
 				<ContentPresenter
@@ -66,7 +67,5 @@
 		<Style Selector="^:nth-child(1)">
 			<Setter Property="Margin" Value="0" />
 		</Style>
-
 	</ControlTheme>
-
 </ResourceDictionary>

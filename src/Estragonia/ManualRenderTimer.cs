@@ -11,8 +11,5 @@ internal sealed class ManualRenderTimer : IRenderTimer
 	bool IRenderTimer.RunsInBackground
 		=> false;
 
-	public void TriggerTick(TimeSpan elapsed)
-	{
-		Tick?.Invoke(elapsed);
-	}
+	public void TriggerTick(TimeSpan elapsed) => Tick?.Invoke(elapsed);
 }

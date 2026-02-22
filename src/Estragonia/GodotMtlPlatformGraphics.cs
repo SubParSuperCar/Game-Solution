@@ -12,8 +12,7 @@ internal sealed class GodotMtlPlatformGraphics : IGodotPlatformGraphics
 	private GodotMtlSkiaGpu? _context;
 	private int _refCount;
 
-	bool IPlatformGraphics.UsesSharedContext
-		=> true;
+	bool IPlatformGraphics.UsesSharedContext => true;
 
 	public IGodotSkiaGpu GetSharedContext()
 	{
@@ -22,6 +21,7 @@ internal sealed class GodotMtlPlatformGraphics : IGodotPlatformGraphics
 
 		if (_context is not null && !_context.IsLost)
 			return _context;
+
 		_context?.Dispose();
 		_context = null;
 		_context = new GodotMtlSkiaGpu();
@@ -29,20 +29,11 @@ internal sealed class GodotMtlPlatformGraphics : IGodotPlatformGraphics
 		return _context;
 	}
 
-	IPlatformGraphicsContext IPlatformGraphics.CreateContext()
-	{
-		throw new NotSupportedException();
-	}
+	IPlatformGraphicsContext IPlatformGraphics.CreateContext() => throw new NotSupportedException();
 
-	IPlatformGraphicsContext IPlatformGraphics.GetSharedContext()
-	{
-		return GetSharedContext();
-	}
+	IPlatformGraphicsContext IPlatformGraphics.GetSharedContext() => GetSharedContext();
 
-	public void AddRef()
-	{
-		Interlocked.Increment(ref _refCount);
-	}
+	public void AddRef() => Interlocked.Increment(ref _refCount);
 
 	public void Release()
 	{
@@ -52,16 +43,13 @@ internal sealed class GodotMtlPlatformGraphics : IGodotPlatformGraphics
 
 	public void Dispose()
 	{
-		if (_context is null)
-			return;
+		if (_context is null) return;
+
 		_context.Dispose();
 		_context = null;
 	}
 
 	[DoesNotReturn]
 	[MethodImpl(MethodImplOptions.NoInlining)]
-	private static void ThrowDisposed()
-	{
-		throw new ObjectDisposedException(nameof(GodotMtlPlatformGraphics));
-	}
+	private static void ThrowDisposed() => throw new ObjectDisposedException(nameof(GodotMtlPlatformGraphics));
 }

@@ -14,23 +14,18 @@ internal sealed class BclStorageFolder(DirectoryInfo directoryInfo) : IStorageBo
 
 	public DirectoryInfo DirectoryInfo { get; } = directoryInfo;
 
-	public string Name
-		=> DirectoryInfo.Name;
+	public string Name => DirectoryInfo.Name;
 
-	public bool CanBookmark
-		=> true;
+	public bool CanBookmark => true;
 
-	public Uri Path
-		=> _path ??= BuildPath();
+	public Uri Path => _path ??= BuildPath();
 
-	public Task<StorageItemProperties> GetBasicPropertiesAsync()
-	{
-		return Task.FromResult(new StorageItemProperties(
+	public Task<StorageItemProperties> GetBasicPropertiesAsync() =>
+		Task.FromResult(new StorageItemProperties(
 			null,
 			DirectoryInfo.CreationTimeUtc,
 			DirectoryInfo.LastAccessTimeUtc
 		));
-	}
 
 	public Task<IStorageFolder?> GetParentAsync()
 	{
@@ -38,13 +33,11 @@ internal sealed class BclStorageFolder(DirectoryInfo directoryInfo) : IStorageBo
 		return Task.FromResult<IStorageFolder?>(storageFolder);
 	}
 
-	public IAsyncEnumerable<IStorageItem> GetItemsAsync()
-	{
-		return DirectoryInfo.EnumerateDirectories()
+	public IAsyncEnumerable<IStorageItem> GetItemsAsync() =>
+		DirectoryInfo.EnumerateDirectories()
 			.Select(IStorageItem (d) => new BclStorageFolder(d))
 			.Concat(DirectoryInfo.EnumerateFiles().Select(f => new BclStorageFile(f)))
 			.AsAsyncEnumerable();
-	}
 
 	public Task<IStorageFolder?> GetFolderAsync(string name)
 	{
@@ -57,18 +50,14 @@ internal sealed class BclStorageFolder(DirectoryInfo directoryInfo) : IStorageBo
 	public Task<IStorageFile?> GetFileAsync(string name)
 	{
 		var file = DirectoryInfo.EnumerateFiles().FirstOrDefault(f => f.Name == name);
-		return file is null ? Task.FromResult<IStorageFile?>(null) : Task.FromResult<IStorageFile?>(new BclStorageFile(file));
+		return file is null
+			? Task.FromResult<IStorageFile?>(null)
+			: Task.FromResult<IStorageFile?>(new BclStorageFile(file));
 	}
 
-	public Task<string?> SaveBookmarkAsync()
-	{
-		return Task.FromResult<string?>(DirectoryInfo.FullName);
-	}
+	public Task<string?> SaveBookmarkAsync() => Task.FromResult<string?>(DirectoryInfo.FullName);
 
-	public Task ReleaseBookmarkAsync()
-	{
-		return Task.CompletedTask;
-	}
+	public Task ReleaseBookmarkAsync() => Task.CompletedTask;
 
 	public void Dispose()
 	{
@@ -84,6 +73,7 @@ internal sealed class BclStorageFolder(DirectoryInfo directoryInfo) : IStorageBo
 	{
 		if (destination is not BclStorageFolder storageFolder)
 			return Task.FromResult<IStorageItem?>(null);
+
 		var newPath = System.IO.Path.Combine(storageFolder.DirectoryInfo.FullName, DirectoryInfo.Name);
 		DirectoryInfo.MoveTo(newPath);
 
@@ -103,7 +93,6 @@ internal sealed class BclStorageFolder(DirectoryInfo directoryInfo) : IStorageBo
 	public Task<IStorageFolder?> CreateFolderAsync(string name)
 	{
 		var newFolder = DirectoryInfo.CreateSubdirectory(name);
-
 		return Task.FromResult<IStorageFolder?>(new BclStorageFolder(newFolder));
 	}
 

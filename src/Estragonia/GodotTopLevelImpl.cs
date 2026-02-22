@@ -88,20 +88,11 @@ internal sealed class GodotTopLevelImpl : ITopLevelImpl
 	AcrylicPlatformCompensationLevels ITopLevelImpl.AcrylicCompensationLevels
 		=> new(1.0, 1.0, 1.0);
 
-	void ITopLevelImpl.SetInputRoot(IInputRoot inputRoot)
-	{
-		_inputRoot = inputRoot;
-	}
+	void ITopLevelImpl.SetInputRoot(IInputRoot inputRoot) => _inputRoot = inputRoot;
 
-	Point ITopLevelImpl.PointToClient(PixelPoint point)
-	{
-		return point.ToPoint(RenderScaling);
-	}
+	Point ITopLevelImpl.PointToClient(PixelPoint point) => point.ToPoint(RenderScaling);
 
-	PixelPoint ITopLevelImpl.PointToScreen(Point point)
-	{
-		return PixelPoint.FromPoint(point, RenderScaling);
-	}
+	PixelPoint ITopLevelImpl.PointToScreen(Point point) => PixelPoint.FromPoint(point, RenderScaling);
 
 	void ITopLevelImpl.SetCursor(ICursorImpl? cursor)
 	{
@@ -113,15 +104,13 @@ internal sealed class GodotTopLevelImpl : ITopLevelImpl
 		CursorChanged?.Invoke(cursorShape);
 	}
 
-	IPopupImpl? ITopLevelImpl.CreatePopup()
-	{
-		return null;
-	}
+	IPopupImpl? ITopLevelImpl.CreatePopup() => null;
 
 	void ITopLevelImpl.SetTransparencyLevelHint(IReadOnlyList<WindowTransparencyLevel> transparencyLevels)
 	{
 		foreach (var transparencyLevel in transparencyLevels)
-			if (transparencyLevel == WindowTransparencyLevel.Transparent || transparencyLevel == WindowTransparencyLevel.None)
+			if (transparencyLevel == WindowTransparencyLevel.Transparent ||
+			    transparencyLevel == WindowTransparencyLevel.None)
 			{
 				TransparencyLevel = transparencyLevel;
 				return;
@@ -132,10 +121,8 @@ internal sealed class GodotTopLevelImpl : ITopLevelImpl
 	{
 	}
 
-	object? IOptionalFeatureProvider.TryGetFeature(Type featureType)
-	{
-		return featureType == typeof(IClipboard) ? _clipboard : null;
-	}
+	object? IOptionalFeatureProvider.TryGetFeature(Type featureType) =>
+		featureType == typeof(IClipboard) ? _clipboard : null;
 
 	public void Dispose()
 	{
@@ -155,27 +142,16 @@ internal sealed class GodotTopLevelImpl : ITopLevelImpl
 		_platformGraphics.Release();
 	}
 
-	private IGodotSkiaSurface CreateSurface()
-	{
-		return _isDisposed
+	private IGodotSkiaSurface CreateSurface() =>
+		_isDisposed
 			? throw new ObjectDisposedException(nameof(GodotTopLevelImpl))
 			: _platformGraphics.GetSharedContext().CreateSurface(_renderSize, RenderScaling);
-	}
 
-	public IGodotSkiaSurface? TryGetSurface()
-	{
-		return _surface;
-	}
+	public IGodotSkiaSurface? TryGetSurface() => _surface;
 
-	public IGodotSkiaSurface GetOrCreateSurface()
-	{
-		return _surface ??= CreateSurface();
-	}
+	public IGodotSkiaSurface GetOrCreateSurface() => _surface ??= CreateSurface();
 
-	private IEnumerable<object> GetOrCreateSurfaces()
-	{
-		return [GetOrCreateSurface()];
-	}
+	private IEnumerable<object> GetOrCreateSurfaces() => [GetOrCreateSurface()];
 
 	[SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator", Justification = "Doesn't affect correctness")]
 	public void SetRenderSize(PixelSize renderSize, double renderScaling)
@@ -210,17 +186,16 @@ internal sealed class GodotTopLevelImpl : ITopLevelImpl
 		{
 			if (_surface != null)
 				_surface.RenderScaling = RenderScaling;
+
 			ScalingChanged?.Invoke(RenderScaling);
 		}
 
 		if (oldClientSize != ClientSize)
-			Resized?.Invoke(ClientSize, hasScalingChanged ? WindowResizeReason.DpiChange : WindowResizeReason.Unspecified);
+			Resized?.Invoke(ClientSize,
+				hasScalingChanged ? WindowResizeReason.DpiChange : WindowResizeReason.Unspecified);
 	}
 
-	public void OnDraw(Rect rect)
-	{
-		Paint?.Invoke(rect);
-	}
+	public void OnDraw(Rect rect) => Paint?.Invoke(rect);
 
 	public bool OnMouseMotion(InputEventMouseMotion inputEvent, ulong timestamp)
 	{
@@ -341,9 +316,8 @@ internal sealed class GodotTopLevelImpl : ITopLevelImpl
 		return args.Handled;
 	}
 
-	private RawPointerPoint CreateRawPointerPoint(Vector2 position, float pressure, Vector2 tilt)
-	{
-		return new RawPointerPoint
+	private RawPointerPoint CreateRawPointerPoint(Vector2 position, float pressure, Vector2 tilt) =>
+		new()
 		{
 			Position = position.ToAvaloniaPoint() / RenderScaling,
 			Twist = 0.0f,
@@ -351,7 +325,6 @@ internal sealed class GodotTopLevelImpl : ITopLevelImpl
 			XTilt = tilt.X * 90.0f,
 			YTilt = tilt.Y * 90.0f
 		};
-	}
 
 	public bool OnKey(InputEventKey inputEvent, ulong timestamp)
 	{
@@ -429,10 +402,7 @@ internal sealed class GodotTopLevelImpl : ITopLevelImpl
 		return args.Handled;
 	}
 
-	public void OnLostFocus()
-	{
-		LostFocus?.Invoke();
-	}
+	public void OnLostFocus() => LostFocus?.Invoke();
 
 	public void OnMouseExited(ulong timestamp)
 	{

@@ -156,10 +156,10 @@ internal static partial class MtlInterop
 				return ctor.Invoke([handle]) as GRContext;
 
 			// Last resort: check base class SKObject for useful patterns
-			var owned = typeof(SKObject).GetMethod("Owned",
-				BindingFlags.NonPublic | BindingFlags.Static);
+			var owned = typeof(SKObject).GetMethod("Owned", BindingFlags.NonPublic | BindingFlags.Static);
 			if (owned is null || !owned.IsGenericMethod)
 				return null;
+
 			var typedOwned = owned.MakeGenericMethod(typeof(GRContext));
 			var result = typedOwned.Invoke(null, [handle]) as GRContext;
 			return result ?? null;
@@ -219,10 +219,7 @@ internal static partial class MtlInterop
 	{
 		public ulong width, height, depth;
 
-		public static MtlSize Create(int w, int h)
-		{
-			return new MtlSize { width = (ulong)w, height = (ulong)h, depth = 1 };
-		}
+		public static MtlSize Create(int w, int h) => new() { width = (ulong)w, height = (ulong)h, depth = 1 };
 	}
 
 	// Cached selectors for Metal operations
@@ -352,6 +349,7 @@ internal static partial class MtlInterop
 		// SKObject.Handle property
 		var handleProp = typeof(SKObject).GetProperty("Handle",
 			BindingFlags.Public | BindingFlags.Instance);
+
 		return handleProp?.GetValue(obj) as IntPtr? ?? IntPtr.Zero;
 	}
 
@@ -360,10 +358,8 @@ internal static partial class MtlInterop
 	[return: MarshalAs(UnmanagedType.Bool)]
 	private static partial bool gr_backendtexture_get_mtl_textureinfo(IntPtr texture, out GrMtlTextureInfoNative info);
 
-	private static IntPtr GetMetalTextureFromBackend(IntPtr backendTexture)
-	{
-		return gr_backendtexture_get_mtl_textureinfo(backendTexture, out var info) ? info.Texture : IntPtr.Zero;
-	}
+	private static IntPtr GetMetalTextureFromBackend(IntPtr backendTexture) =>
+		gr_backendtexture_get_mtl_textureinfo(backendTexture, out var info) ? info.Texture : IntPtr.Zero;
 
 	#endregion
 }

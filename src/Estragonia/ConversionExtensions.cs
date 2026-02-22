@@ -315,33 +315,18 @@ public static class ConversionExtensions
 		[StandardCursorType.DragLink] = GdCursorShape.Drag
 	};
 
-	public static AvKey ToAvaloniaKey(this GdKey source)
-	{
-		return SKeyMap.GetValueOrDefault(source, AvKey.None);
-	}
+	public static AvKey ToAvaloniaKey(this GdKey source) => SKeyMap.GetValueOrDefault(source, AvKey.None);
 
-	public static PhysicalKey ToAvaloniaPhysicalKey(this GdKey source)
-	{
-		return SPhysicalKeyMap.GetValueOrDefault(source, PhysicalKey.None);
-	}
+	public static PhysicalKey ToAvaloniaPhysicalKey(this GdKey source) =>
+		SPhysicalKeyMap.GetValueOrDefault(source, PhysicalKey.None);
 
-	public static Size ToAvaloniaSize(this Vector2 source)
-	{
-		return new Size(source.X, source.Y);
-	}
+	public static Size ToAvaloniaSize(this Vector2 source) => new(source.X, source.Y);
 
-	public static Point ToAvaloniaPoint(this Vector2 source)
-	{
-		return new Point(source.X, source.Y);
-	}
+	public static Point ToAvaloniaPoint(this Vector2 source) => new(source.X, source.Y);
 
-	public static AvColor ToAvaloniaColor(this GdColor source)
-	{
-		return new AvColor((byte)source.A8, (byte)source.R8, (byte)source.G8, (byte)source.B8);
-	}
+	public static AvColor ToAvaloniaColor(this GdColor source) =>
+		new((byte)source.A8, (byte)source.R8, (byte)source.G8, (byte)source.B8);
 
-	public static GdCursorShape ToGodotCursorShape(this StandardCursorType source)
-	{
-		return SCursorMap.GetValueOrDefault(source, GdCursorShape.Arrow);
-	}
+	public static GdCursorShape ToGodotCursorShape(this StandardCursorType source) =>
+		SCursorMap.GetValueOrDefault(source, GdCursorShape.Arrow);
 }

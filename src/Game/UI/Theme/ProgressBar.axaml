@@ -17,20 +17,22 @@
 	<ControlTheme x:Key="{x:Type ProgressBar}" TargetType="ProgressBar">
 		<Setter Property="Background" Value="{StaticResource ProgressBarBackgroundBrush}" />
 		<Setter Property="Foreground" Value="{StaticResource ProgressBarForegroundBrush}" />
+
 		<Setter Property="Template">
 			<ControlTemplate TargetType="ProgressBar">
 				<Grid>
-
 					<Border
 						Background="{TemplateBinding Background}"
 						BorderBrush="{TemplateBinding BorderBrush}"
 						BorderThickness="{TemplateBinding BorderThickness}"
 						CornerRadius="{TemplateBinding CornerRadius}">
+
 						<Panel>
 							<Border
 								x:Name="PART_Indicator"
 								Background="{TemplateBinding Foreground}"
 								IsVisible="{Binding !IsIndeterminate, RelativeSource={RelativeSource TemplatedParent}}">
+
 								<Border.Transitions>
 									<Transitions>
 										<DoubleTransition Property="Width" Duration="0.1" Easing="LinearEasing" />
@@ -38,6 +40,7 @@
 									</Transitions>
 								</Border.Transitions>
 							</Border>
+
 							<Border
 								x:Name="PART_IndeterminateIndicator"
 								Background="{TemplateBinding Foreground}"
@@ -50,6 +53,7 @@
 						HorizontalAlignment="Center"
 						VerticalAlignment="Center"
 						IsVisible="{Binding ShowProgressText, RelativeSource={RelativeSource TemplatedParent}}">
+
 						<TextBlock Foreground="{StaticResource ForegroundBrush}">
 							<TextBlock.Text>
 								<MultiBinding Converter="{StaticResource StringFormatConverter}">
@@ -62,7 +66,6 @@
 							</TextBlock.Text>
 						</TextBlock>
 					</LayoutTransformControl>
-
 				</Grid>
 			</ControlTemplate>
 		</Setter>
@@ -71,18 +74,22 @@
 			<Setter Property="HorizontalAlignment" Value="Left" />
 			<Setter Property="VerticalAlignment" Value="Stretch" />
 		</Style>
+
 		<Style Selector="^:vertical /template/ Border#PART_Indicator">
 			<Setter Property="HorizontalAlignment" Value="Stretch" />
 			<Setter Property="VerticalAlignment" Value="Bottom" />
 		</Style>
+
 		<Style Selector="^:horizontal">
 			<Setter Property="MinWidth" Value="200" />
 			<Setter Property="MinHeight" Value="16" />
 		</Style>
+
 		<Style Selector="^:vertical">
 			<Setter Property="MinWidth" Value="16" />
 			<Setter Property="MinHeight" Value="200" />
 		</Style>
+
 		<Style Selector="^:vertical /template/ LayoutTransformControl#PART_LayoutTransformControl">
 			<Setter Property="LayoutTransform">
 				<Setter.Value>
@@ -97,17 +104,21 @@
 					Easing="LinearEasing"
 					IterationCount="Infinite"
 					Duration="0:0:3">
+
 					<KeyFrame Cue="0%">
 						<Setter Property="TranslateTransform.X"
 						        Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateStartingOffset}" />
 					</KeyFrame>
+
 					<KeyFrame Cue="100%">
 						<Setter Property="TranslateTransform.X"
 						        Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateEndingOffset}" />
 					</KeyFrame>
 				</Animation>
 			</Style.Animations>
-			<Setter Property="Width" Value="{Binding TemplateSettings.ContainerWidth, RelativeSource={RelativeSource TemplatedParent}}" />
+
+			<Setter Property="Width"
+			        Value="{Binding TemplateSettings.ContainerWidth, RelativeSource={RelativeSource TemplatedParent}}" />
 		</Style>
 
 		<Style Selector="^:vertical:indeterminate /template/ Border#PART_IndeterminateIndicator">
@@ -116,19 +127,21 @@
 					Easing="LinearEasing"
 					IterationCount="Infinite"
 					Duration="0:0:3">
+
 					<KeyFrame Cue="0%">
 						<Setter Property="TranslateTransform.Y"
 						        Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateStartingOffset}" />
 					</KeyFrame>
+
 					<KeyFrame Cue="100%">
 						<Setter Property="TranslateTransform.Y"
 						        Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateEndingOffset}" />
 					</KeyFrame>
 				</Animation>
 			</Style.Animations>
+
 			<Setter Property="Height"
 			        Value="{Binding TemplateSettings.ContainerWidth, RelativeSource={RelativeSource TemplatedParent}}" />
 		</Style>
-
 	</ControlTheme>
 </ResourceDictionary>
