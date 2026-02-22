@@ -4,3 +4,6 @@ dist/
 .idea/
 .vs/
 .godot/
+/_ReSharper.Caches/
+*.user
+*.blend1
