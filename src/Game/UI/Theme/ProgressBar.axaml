@@ -102,7 +102,8 @@
 						        Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateStartingOffset}" />
 					</KeyFrame>
 					<KeyFrame Cue="100%">
-						<Setter Property="TranslateTransform.X" Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateEndingOffset}" />
+						<Setter Property="TranslateTransform.X"
+						        Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateEndingOffset}" />
 					</KeyFrame>
 				</Animation>
 			</Style.Animations>
@@ -120,11 +121,13 @@
 						        Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateStartingOffset}" />
 					</KeyFrame>
 					<KeyFrame Cue="100%">
-						<Setter Property="TranslateTransform.Y" Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateEndingOffset}" />
+						<Setter Property="TranslateTransform.Y"
+						        Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateEndingOffset}" />
 					</KeyFrame>
 				</Animation>
 			</Style.Animations>
-			<Setter Property="Height" Value="{Binding TemplateSettings.ContainerWidth, RelativeSource={RelativeSource TemplatedParent}}" />
+			<Setter Property="Height"
+			        Value="{Binding TemplateSettings.ContainerWidth, RelativeSource={RelativeSource TemplatedParent}}" />
 		</Style>
 
 	</ControlTheme>
