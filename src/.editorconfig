@@ -3,7 +3,7 @@ root=true
 max_line_length=127
 trim_trailing_whitespace=true
 insert_final_newline=true
-[*.{csproj,cs,axaml,gdshader,json}]
+[*.{csproj,cs,axaml,gdshader}]
 indent_style=tab
 indent_size=2
 [.{cs,axaml}]
