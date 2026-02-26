@@ -5,7 +5,7 @@
       "commandName": "Executable",
       "executablePath": "Launcher/godot$(ScriptExt)",
       "workingDirectory": "$(ProjectDir)",
-      "commandLineArgs": "--path $(ProjectDir)",
+      "commandLineArgs": "--path $(ProjectDir) --run",
       "nativeDebugging": true
     },
     "Editor": {
