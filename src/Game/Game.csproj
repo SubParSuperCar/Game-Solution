@@ -10,6 +10,12 @@
 		<OutputType>Exe</OutputType>
 		<UseAppHost>false</UseAppHost>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+  		<ScriptExt>.cmd</ScriptExt>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+  		<ScriptExt>.sh</ScriptExt>
+	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Avalonia.Themes.Simple" Version="11.3.0"/>
 		<PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.2.0.1"/>
@@ -27,5 +33,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="UI/Fonts/OFL.txt"/>
+		<None Include="Launcher/**/*"/>
 	</ItemGroup>
 </Project>

@@ -3,14 +3,14 @@
   "profiles": {
     "Player": {
       "commandName": "Executable",
-      "executablePath": "Godot",
+      "executablePath": "Launcher/godot$(ScriptExt)",
       "workingDirectory": "$(ProjectDir)",
       "commandLineArgs": "--path $(ProjectDir)",
       "nativeDebugging": true
     },
     "Editor": {
       "commandName": "Executable",
-      "executablePath": "Godot",
+      "executablePath": "Launcher/godot$(ScriptExt)",
       "workingDirectory": "$(ProjectDir)",
       "commandLineArgs": "--editor --path $(ProjectDir)",
       "nativeDebugging": true
