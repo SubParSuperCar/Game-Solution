@@ -11,10 +11,10 @@
 		<UseAppHost>false</UseAppHost>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
-  		<ScriptExt>.cmd</ScriptExt>
+		<ScriptExt>.cmd</ScriptExt>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
-  		<ScriptExt>.sh</ScriptExt>
+		<ScriptExt>.sh</ScriptExt>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Avalonia.Themes.Simple" Version="11.3.0"/>
