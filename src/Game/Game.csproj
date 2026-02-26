@@ -11,10 +11,10 @@
 		<UseAppHost>false</UseAppHost>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
-		<ScriptExt>.cmd</ScriptExt>
+		<GdLauncherScriptExt>.cmd</GdLauncherScriptExt>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
-		<ScriptExt>.sh</ScriptExt>
+		<GdLauncherScriptExt>.sh</GdLauncherScriptExt>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Avalonia.Themes.Simple" Version="11.3.0"/>
@@ -33,6 +33,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="UI/Fonts/OFL.txt"/>
-		<None Include="Launcher/**/*"/>
+		<None Include="GdLauncher/**/*"/>
 	</ItemGroup>
 </Project>
