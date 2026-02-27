@@ -5,14 +5,14 @@
       "commandName": "Executable",
       "executablePath": "GdLauncher/godot$(GdLauncherScriptExt)",
       "workingDirectory": "$(ProjectDir)",
-      "commandLineArgs": "--path $(ProjectDir) --run",
+      "commandLineArgs": "--path \"$(ProjectDir)",
       "nativeDebugging": true
     },
     "Editor": {
       "commandName": "Executable",
       "executablePath": "GdLauncher/godot$(GdLauncherScriptExt)",
       "workingDirectory": "$(ProjectDir)",
-      "commandLineArgs": "--editor --path $(ProjectDir)",
+      "commandLineArgs": "--editor --path \"$(ProjectDir)",
       "nativeDebugging": true
     }
   }
