@@ -15,7 +15,7 @@ EndProject
 
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Workflows", "GitHub Workflows", "{5F8E6A0B-4A0A-4E8E-9F7D-0A4E1C9F9C11}"
     ProjectSection(SolutionItems) = preProject
-        ../.github/workflows/build.yaml = ../.github/workflows/build.yaml
+        ../.github/workflows/ci.yaml = ../.github/workflows/ci.yaml
     EndProjectSection
 EndProject
 
