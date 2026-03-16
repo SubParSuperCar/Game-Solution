@@ -1,8 +1,8 @@
 # Game-Solution
 
 A Godot + Avalonia UI game project built on a fork of [Estragonia](https://github.com/MrJul/Estragonia) (MIT licensed)
-by [Julien Lebosquain](https://github.com/MrJul) ("MrJul") and its contributors. This fork targets **.NET 8
-**, [Avalonia UI v11.3.0](https://github.com/AvaloniaUI/Avalonia/releases/tag/11.3.0),
+by [Julien Lebosquain](https://github.com/MrJul) ("MrJul") and its contributors. This fork targets
+**.NET 8**, [Avalonia UI v11.3.0](https://github.com/AvaloniaUI/Avalonia/releases/tag/11.3.0),
 and [Godot Engine v4.6](https://github.com/godotengine/godot/releases/tag/4.6-stable).
 
 ## Changes from Upstream
