@@ -4,11 +4,11 @@ using Godot;
 namespace Estragonia;
 
 /// <summary>Factory for creating the appropriate platform graphics implementation.</summary>
-internal static class GodotPlatformGraphicsFactory
+internal static class GdPlatformGraphicsFactory
 {
 	/// <summary>Creates the appropriate platform graphics implementation based on the current renderer.</summary>
 	/// <returns>A Vulkan or Metal platform graphics implementation.</returns>
-	public static IGodotPlatformGraphics Create()
+	public static IGdPlatformGraphics Create()
 	{
 		var renderingDevice = RenderingServer.GetRenderingDevice();
 
@@ -16,9 +16,9 @@ internal static class GodotPlatformGraphicsFactory
 			throw new NotSupportedException("Estragonia requires Forward+ or Mobile renderer");
 
 		if (ShouldUseMetal())
-			return new GodotMtlPlatformGraphics();
+			return new GdMtlPlatformGraphics();
 
-		return new GodotVkPlatformGraphics();
+		return new GdVkPlatformGraphics();
 	}
 
 	/// <summary>Determines whether to use the Metal backend.</summary>

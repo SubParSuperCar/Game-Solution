@@ -10,7 +10,7 @@ using SkiaSharp;
 namespace Estragonia;
 
 /// <summary>Bridges the Godot Metal renderer with a Skia context used by Avalonia.</summary>
-internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
+internal sealed class GdMtlSkiaGpu : IGdSkiaGpu
 {
 	private readonly GRContext _grContext;
 	private readonly IntPtr _mtlQueue;
@@ -18,7 +18,7 @@ internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
 	private readonly RenderingDevice _renderingDevice;
 	private readonly MtlSynchronizer _synchronizer;
 
-	public GodotMtlSkiaGpu()
+	public GdMtlSkiaGpu()
 	{
 		_renderingDevice = RenderingServer.GetRenderingDevice();
 
@@ -52,11 +52,11 @@ internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
 	IDisposable IPlatformGraphicsContext.EnsureCurrent() => EmptyDisposable.Instance;
 
 	ISkiaGpuRenderTarget? ISkiaGpu.TryCreateRenderTarget(IEnumerable<object> surfaces) =>
-		surfaces.OfType<GodotSkiaSurfaceMetal>().FirstOrDefault() is { } surface
-			? new GodotSkiaRenderTarget(surface, _grContext, _synchronizer)
+		surfaces.OfType<GdSkiaSurfaceMtl>().FirstOrDefault() is { } surface
+			? new GdSkiaRenderTarget(surface, _grContext, _synchronizer)
 			: null;
 
-	public IGodotSkiaSurface CreateSurface(PixelSize size, double renderScaling)
+	public IGdSkiaSurface CreateSurface(PixelSize size, double renderScaling)
 	{
 		size = new PixelSize(Math.Max(size.Width, 1), Math.Max(size.Height, 1));
 
@@ -119,7 +119,7 @@ internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
 		if (skSurface is null)
 			throw new InvalidOperationException("Couldn't create Skia surface");
 
-		return new GodotSkiaSurfaceMetal(
+		return new GdSkiaSurfaceMtl(
 			skSurface,
 			gdTexture,
 			_renderingDevice,
@@ -132,7 +132,7 @@ internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
 	}
 
 	ISkiaSurface? ISkiaGpu.TryCreateSurface(PixelSize size, ISkiaGpuRenderSession? session) =>
-		session is GodotSkiaGpuRenderSession godotSession
+		session is GdSkiaGpuRenderSession godotSession
 			? CreateSurface(size, godotSession.Surface.RenderScaling)
 			: null;
 
@@ -142,7 +142,7 @@ internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
 		_synchronizer.Dispose();
 	}
 
-	private GodotSkiaSurfaceMetal? TryCreateZeroCopySurface(
+	private GdSkiaSurfaceMtl? TryCreateZeroCopySurface(
 		IntPtr gdMetalTexture,
 		PixelSize size,
 		Texture2Drd gdTexture,
@@ -168,7 +168,7 @@ internal sealed class GodotMtlSkiaGpu : IGodotSkiaGpu
 				SKColorType.Rgba8888);
 
 			if (skSurface is not null)
-				return new GodotSkiaSurfaceMetal(
+				return new GdSkiaSurfaceMtl(
 					skSurface,
 					gdTexture,
 					_renderingDevice,

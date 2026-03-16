@@ -15,7 +15,7 @@ using Environment = System.Environment;
 namespace Estragonia;
 
 /// <summary>Bridges the Godot Vulkan renderer with a Skia context used by Avalonia.</summary>
-internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
+internal sealed class GdVkSkiaGpu : IGdSkiaGpu
 {
 	private readonly VkBarrierHelper _barrierHelper;
 	private readonly GRContext _grContext;
@@ -23,7 +23,7 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 
 	private readonly RenderingDevice _renderingDevice;
 
-	public unsafe GodotVkSkiaGpu()
+	public unsafe GdVkSkiaGpu()
 	{
 		_renderingDevice = RenderingServer.GetRenderingDevice();
 
@@ -106,11 +106,11 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 	IDisposable IPlatformGraphicsContext.EnsureCurrent() => EmptyDisposable.Instance;
 
 	ISkiaGpuRenderTarget? ISkiaGpu.TryCreateRenderTarget(IEnumerable<object> surfaces) =>
-		surfaces.OfType<GodotSkiaSurface>().FirstOrDefault() is { } surface
-			? new GodotSkiaRenderTarget(surface, _grContext, _barrierHelper)
+		surfaces.OfType<GdSkiaSurface>().FirstOrDefault() is { } surface
+			? new GdSkiaRenderTarget(surface, _grContext, _barrierHelper)
 			: null;
 
-	public IGodotSkiaSurface CreateSurface(PixelSize size, double renderScaling)
+	public IGdSkiaSurface CreateSurface(PixelSize size, double renderScaling)
 	{
 		size = new PixelSize(Math.Max(size.Width, 1), Math.Max(size.Height, 1));
 
@@ -178,7 +178,7 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 			TextureRdRid = gdRdTexture
 		};
 
-		var surface = new GodotSkiaSurface(
+		var surface = new GdSkiaSurface(
 			skSurface,
 			gdTexture,
 			vkImage,
@@ -194,7 +194,7 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 	}
 
 	ISkiaSurface? ISkiaGpu.TryCreateSurface(PixelSize size, ISkiaGpuRenderSession? session) =>
-		session is GodotSkiaGpuRenderSession godotSession
+		session is GdSkiaGpuRenderSession godotSession
 			? CreateSurface(size, godotSession.Surface.RenderScaling)
 			: null;
 
@@ -243,7 +243,7 @@ internal sealed class GodotVkSkiaGpu : IGodotSkiaGpu
 
 		static bool TryLoadByName(string libraryName, out IntPtr handle)
 		{
-			return NativeLibrary.TryLoad(libraryName, typeof(GodotVkSkiaGpu).Assembly, null, out handle);
+			return NativeLibrary.TryLoad(libraryName, typeof(GdVkSkiaGpu).Assembly, null, out handle);
 		}
 
 		static bool TryLoadByPath(string libraryPath, out IntPtr handle)

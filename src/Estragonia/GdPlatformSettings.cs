@@ -4,7 +4,7 @@ using Godot;
 namespace Estragonia;
 
 /// <summary>Implementation of <see cref="IPlatformSettings" /> for Godot.</summary>
-internal sealed class GodotPlatformSettings : DefaultPlatformSettings
+internal sealed class GdPlatformSettings : DefaultPlatformSettings
 {
 	public override PlatformColorValues GetColorValues() =>
 		new()

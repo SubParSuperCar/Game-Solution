@@ -7,15 +7,15 @@ using Avalonia.Platform;
 namespace Estragonia;
 
 /// <summary>Godot Vulkan-based <see cref="IPlatformGraphics" /> implementation.</summary>
-internal sealed class GodotVkPlatformGraphics : IGodotPlatformGraphics
+internal sealed class GdVkPlatformGraphics : IGdPlatformGraphics
 {
-	private GodotVkSkiaGpu? _context;
+	private GdVkSkiaGpu? _context;
 	private int _refCount;
 
 	bool IPlatformGraphics.UsesSharedContext
 		=> true;
 
-	public IGodotSkiaGpu GetSharedContext()
+	public IGdSkiaGpu GetSharedContext()
 	{
 		if (Volatile.Read(ref _refCount) == 0)
 			ThrowDisposed();
@@ -25,7 +25,7 @@ internal sealed class GodotVkPlatformGraphics : IGodotPlatformGraphics
 
 		_context?.Dispose();
 		_context = null;
-		_context = new GodotVkSkiaGpu();
+		_context = new GdVkSkiaGpu();
 
 		return _context;
 	}
@@ -54,5 +54,5 @@ internal sealed class GodotVkPlatformGraphics : IGodotPlatformGraphics
 
 	[DoesNotReturn]
 	[MethodImpl(MethodImplOptions.NoInlining)]
-	private static void ThrowDisposed() => throw new ObjectDisposedException(nameof(GodotVkPlatformGraphics));
+	private static void ThrowDisposed() => throw new ObjectDisposedException(nameof(GdVkPlatformGraphics));
 }

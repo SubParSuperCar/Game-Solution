@@ -10,7 +10,7 @@ using Environment = System.Environment;
 namespace Estragonia;
 
 /// <summary>Implementation of <see cref="IStorageProvider" /> for Godot.</summary>
-internal sealed class GodotStorageProvider : IStorageProvider
+internal sealed class GdStorageProvider : IStorageProvider
 {
 	public bool CanOpen
 		=> true;

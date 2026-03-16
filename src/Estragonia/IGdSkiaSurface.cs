@@ -5,7 +5,7 @@ using SkiaSharp;
 namespace Estragonia;
 
 /// <summary>Interface for Godot Skia surfaces that can be used for rendering.</summary>
-internal interface IGodotSkiaSurface : ISkiaSurface
+internal interface IGdSkiaSurface : ISkiaSurface
 {
 	/// <summary>Gets the underlying Skia surface.</summary>
 	SKSurface SkSurface { get; }

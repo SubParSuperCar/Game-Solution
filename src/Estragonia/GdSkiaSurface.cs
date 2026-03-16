@@ -7,7 +7,7 @@ using static Estragonia.VkInterop;
 namespace Estragonia;
 
 /// <summary>Encapsulates a Skia surface along with the Godot texture it comes from (Vulkan backend).</summary>
-internal sealed class GodotSkiaSurface(
+internal sealed class GdSkiaSurface(
 	SKSurface skSurface,
 	Texture2Drd gdTexture,
 	VkImage vkImage,
@@ -16,7 +16,7 @@ internal sealed class GodotSkiaSurface(
 	double renderScaling,
 	VkBarrierHelper barrierHelper
 )
-	: IGodotSkiaSurface
+	: IGdSkiaSurface
 {
 	private VkImage VkImage { get; } = vkImage;
 

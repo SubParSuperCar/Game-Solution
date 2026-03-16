@@ -4,7 +4,7 @@ using Avalonia.Input;
 namespace Estragonia.Input;
 
 /// <summary>Contains the various Avalonia devices created from Godot.</summary>
-public static class GodotDevices
+public static class GdDevices
 {
 	/// <summary>The device identifier used by emulated devices.</summary>
 	public const int EmulatedDeviceId = -1;

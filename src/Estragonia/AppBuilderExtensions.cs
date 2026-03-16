@@ -10,9 +10,9 @@ public static class AppBuilderExtensions
 		builder
 			.UseStandardRuntimePlatformSubsystem()
 			.UseSkia()
-			.UseWindowingSubsystem(GodotPlatform.Initialize)
+			.UseWindowingSubsystem(GdPlatform.Initialize)
 			.AfterSetup(_ =>
 				AvaloniaLocator.CurrentMutable
-					.Bind<IKeyboardNavigationHandler>().ToTransient<GodotKeyboardNavigationHandler>()
+					.Bind<IKeyboardNavigationHandler>().ToTransient<GdKeyboardNavigationHandler>()
 			);
 }

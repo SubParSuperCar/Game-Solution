@@ -5,7 +5,7 @@ using Avalonia.Platform.Storage;
 namespace Estragonia;
 
 /// <summary>Implementation of <see cref="IStorageProviderFactory" /> for Godot.</summary>
-internal sealed class GodotStorageProviderFactory : IStorageProviderFactory
+internal sealed class GdStorageProviderFactory : IStorageProviderFactory
 {
-	public IStorageProvider CreateProvider(TopLevel topLevel) => new GodotStorageProvider();
+	public IStorageProvider CreateProvider(TopLevel topLevel) => new GdStorageProvider();
 }

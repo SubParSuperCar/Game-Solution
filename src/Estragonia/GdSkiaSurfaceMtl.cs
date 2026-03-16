@@ -6,7 +6,7 @@ using SkiaSharp;
 namespace Estragonia;
 
 /// <summary>Encapsulates a Skia surface along with the Godot texture it comes from (Metal backend).</summary>
-internal sealed class GodotSkiaSurfaceMetal(
+internal sealed class GdSkiaSurfaceMtl(
 	SKSurface skSurface,
 	Texture2Drd gdTexture,
 	RenderingDevice renderingDevice,
@@ -18,7 +18,7 @@ internal sealed class GodotSkiaSurfaceMetal(
 	bool isZeroCopy = false,
 	GRBackendTexture? backendTexture = null
 )
-	: IGodotSkiaSurface
+	: IGdSkiaSurface
 {
 	/// <summary>The Metal command queue handle for GPU blitting.</summary>
 	public IntPtr CommandQueue { get; } = commandQueue;

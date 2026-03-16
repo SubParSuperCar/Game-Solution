@@ -8,19 +8,19 @@ namespace Estragonia;
 ///     A <see cref="TopLevel" /> used with Godot.
 ///     This is implicitly created by <see cref="AvaloniaControl" />.
 /// </summary>
-public sealed class GodotTopLevel : EmbeddableControlRoot
+public sealed class GdTopLevel : EmbeddableControlRoot
 {
-	static GodotTopLevel()
+	static GdTopLevel()
 		// TopLevel has Cycle navigation mode, but we want the focus to be able to leave Avalonia to return back to godot: use Continue
 	{
-		KeyboardNavigation.TabNavigationProperty.OverrideDefaultValue<GodotTopLevel>(KeyboardNavigationMode.Continue);
+		KeyboardNavigation.TabNavigationProperty.OverrideDefaultValue<GdTopLevel>(KeyboardNavigationMode.Continue);
 	}
 
-	internal GodotTopLevel(GodotTopLevelImpl impl)
+	internal GdTopLevel(GdTopLevelImpl impl)
 		: base(impl)
 	{
 		Impl = impl;
 	}
 
-	internal GodotTopLevelImpl Impl { get; }
+	internal GdTopLevelImpl Impl { get; }
 }

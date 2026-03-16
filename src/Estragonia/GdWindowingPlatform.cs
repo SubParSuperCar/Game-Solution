@@ -3,7 +3,7 @@ using Avalonia.Platform;
 
 namespace Estragonia;
 
-internal sealed class GodotWindowingPlatform : IWindowingPlatform
+internal sealed class GdWindowingPlatform : IWindowingPlatform
 {
 	public IWindowImpl CreateWindow() => throw CreateNotImplementedException();
 

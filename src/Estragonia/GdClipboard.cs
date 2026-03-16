@@ -7,7 +7,7 @@ using Godot;
 namespace Estragonia;
 
 /// <summary>An implementation of <see cref="IClipboard" /> that uses Godot clipboard methods.</summary>
-internal sealed class GodotClipboard : IClipboard
+internal sealed class GdClipboard : IClipboard
 {
 	public Task<string?> GetTextAsync() => Task.FromResult<string?>(DisplayServer.ClipboardGet());
 

@@ -19,7 +19,7 @@ public class AvaloniaControl : GdControl
 {
 	private AvControl? _control;
 	private double _renderScaling = 1.0;
-	private GodotTopLevel? _topLevel;
+	private GdTopLevel? _topLevel;
 
 	/// <summary>Gets or sets the underlying Avalonia control that will be rendered.</summary>
 	protected AvControl? Control
@@ -118,7 +118,7 @@ public class AvaloniaControl : GdControl
 
 		var locator = AvaloniaLocator.Current;
 
-		if (locator.GetService<IPlatformGraphics>() is not IGodotPlatformGraphics graphics)
+		if (locator.GetService<IPlatformGraphics>() is not IGdPlatformGraphics graphics)
 		{
 			GD.PrintErr(
 				"No Godot platform graphics found, did you forget to register your Avalonia app with UseGodot()?");
@@ -126,14 +126,14 @@ public class AvaloniaControl : GdControl
 		}
 
 		var topLevelImpl =
-			new GodotTopLevelImpl(graphics, locator.GetRequiredService<IClipboard>(), GodotPlatform.Compositor)
+			new GdTopLevelImpl(graphics, locator.GetRequiredService<IClipboard>(), GdPlatform.Compositor)
 			{
 				CursorChanged = OnAvaloniaCursorChanged
 			};
 
 		topLevelImpl.SetRenderSize(GetFrameSize(), RenderScaling);
 
-		_topLevel = new GodotTopLevel(topLevelImpl)
+		_topLevel = new GdTopLevel(topLevelImpl)
 		{
 			Background = null,
 			Content = Control,
@@ -154,7 +154,7 @@ public class AvaloniaControl : GdControl
 
 	public override void _Process(double delta)
 	{
-		GodotPlatform.TriggerRenderTick();
+		GdPlatform.TriggerRenderTick();
 
 		// We might have cleared the texture after resize to prevent corruption on AMD GPU (see GodotSkiaGpuRenderSession),
 		// force a re-render.
@@ -186,8 +186,8 @@ public class AvaloniaControl : GdControl
 
 		NavigationMethod navigationMethod;
 
-		if (GdInput.IsActionPressed(GodotBuiltInActions.UiFocusNext) ||
-		    GdInput.IsActionPressed(GodotBuiltInActions.UiFocusPrev))
+		if (GdInput.IsActionPressed(GdBuiltInActions.UiFocusNext) ||
+		    GdInput.IsActionPressed(GdBuiltInActions.UiFocusPrev))
 			navigationMethod = NavigationMethod.Tab;
 		else if (GdInput.GetMouseButtonMask() != 0)
 			navigationMethod = NavigationMethod.Pointer;
@@ -219,30 +219,30 @@ public class AvaloniaControl : GdControl
 	{
 		if (!inputEvent.IsActionType()) return false;
 
-		if (inputEvent.IsActionPressed(GodotBuiltInActions.UiFocusNext, true, true))
+		if (inputEvent.IsActionPressed(GdBuiltInActions.UiFocusNext, true, true))
 			return TryMoveFocus(NavigationDirection.Next, inputEvent);
 
-		if (inputEvent.IsActionPressed(GodotBuiltInActions.UiFocusPrev, true, true))
+		if (inputEvent.IsActionPressed(GdBuiltInActions.UiFocusPrev, true, true))
 			return TryMoveFocus(NavigationDirection.Previous, inputEvent);
 
 		if (!AutoConvertUiActionToKeyDown) return false;
 
-		if (inputEvent.IsActionPressed(GodotBuiltInActions.UiLeft, true, true))
+		if (inputEvent.IsActionPressed(GdBuiltInActions.UiLeft, true, true))
 			return SimulateKeyDownFromAction(inputEvent, GdKey.Left);
 
-		if (inputEvent.IsActionPressed(GodotBuiltInActions.UiRight, true, true))
+		if (inputEvent.IsActionPressed(GdBuiltInActions.UiRight, true, true))
 			return SimulateKeyDownFromAction(inputEvent, GdKey.Right);
 
-		if (inputEvent.IsActionPressed(GodotBuiltInActions.UiUp, true, true))
+		if (inputEvent.IsActionPressed(GdBuiltInActions.UiUp, true, true))
 			return SimulateKeyDownFromAction(inputEvent, GdKey.Up);
 
-		if (inputEvent.IsActionPressed(GodotBuiltInActions.UiDown, true, true))
+		if (inputEvent.IsActionPressed(GdBuiltInActions.UiDown, true, true))
 			return SimulateKeyDownFromAction(inputEvent, GdKey.Down);
 
-		if (inputEvent.IsActionPressed(GodotBuiltInActions.UiAccept, true, true))
+		if (inputEvent.IsActionPressed(GdBuiltInActions.UiAccept, true, true))
 			return SimulateKeyDownFromAction(inputEvent, GdKey.Enter);
 
-		return inputEvent.IsActionPressed(GodotBuiltInActions.UiCancel, true, true) &&
+		return inputEvent.IsActionPressed(GdBuiltInActions.UiCancel, true, true) &&
 		       SimulateKeyDownFromAction(inputEvent, GdKey.Escape);
 	}
 
@@ -263,7 +263,7 @@ public class AvaloniaControl : GdControl
 		return args.Handled;
 	}
 
-	private static bool TryHandleInput(GodotTopLevelImpl impl, InputEvent inputEvent) =>
+	private static bool TryHandleInput(GdTopLevelImpl impl, InputEvent inputEvent) =>
 		inputEvent switch
 		{
 			InputEventMouseMotion mouseMotion => impl.OnMouseMotion(mouseMotion, Time.GetTicksMsec()),

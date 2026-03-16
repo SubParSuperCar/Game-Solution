@@ -15,33 +15,33 @@ using AvCompositor = Avalonia.Rendering.Composition.Compositor;
 namespace Estragonia;
 
 /// <summary>Contains Godot to Avalonia platform initialization.</summary>
-internal static class GodotPlatform
+internal static class GdPlatform
 {
 	private static AvCompositor? _sCompositor;
 	private static ManualRenderTimer? _sRenderTimer;
 	private static ulong _sLastProcessFrame = ulong.MaxValue;
 
 	public static AvCompositor Compositor
-		=> _sCompositor ?? throw new InvalidOperationException($"{nameof(GodotPlatform)} hasn't been initialized");
+		=> _sCompositor ?? throw new InvalidOperationException($"{nameof(GdPlatform)} hasn't been initialized");
 
 	public static void Initialize()
 	{
 		AvaloniaSynchronizationContext.AutoInstall = false; // Godot has its own sync context, don't replace it
 
-		var platformGraphics = GodotPlatformGraphicsFactory.Create();
+		var platformGraphics = GdPlatformGraphicsFactory.Create();
 		var renderTimer = new ManualRenderTimer();
 
 		AvaloniaLocator.CurrentMutable
-			.Bind<IClipboard>().ToConstant(new GodotClipboard())
-			.Bind<ICursorFactory>().ToConstant(new GodotCursorFactory())
-			.Bind<IDispatcherImpl>().ToConstant(new GodotDispatcherImpl(Thread.CurrentThread))
-			.Bind<IKeyboardDevice>().ToConstant(GodotDevices.Keyboard)
+			.Bind<IClipboard>().ToConstant(new GdClipboard())
+			.Bind<ICursorFactory>().ToConstant(new GdCursorFactory())
+			.Bind<IDispatcherImpl>().ToConstant(new GdDispatcherImpl(Thread.CurrentThread))
+			.Bind<IKeyboardDevice>().ToConstant(GdDevices.Keyboard)
 			.Bind<IPlatformGraphics>().ToConstant(platformGraphics)
 			.Bind<IPlatformIconLoader>().ToConstant(new StubPlatformIconLoader())
-			.Bind<IPlatformSettings>().ToConstant(new GodotPlatformSettings())
+			.Bind<IPlatformSettings>().ToConstant(new GdPlatformSettings())
 			.Bind<IRenderTimer>().ToConstant(renderTimer)
-			.Bind<IWindowingPlatform>().ToConstant(new GodotWindowingPlatform())
-			.Bind<IStorageProviderFactory>().ToConstant(new GodotStorageProviderFactory())
+			.Bind<IWindowingPlatform>().ToConstant(new GdWindowingPlatform())
+			.Bind<IStorageProviderFactory>().ToConstant(new GdStorageProviderFactory())
 			.Bind<PlatformHotkeyConfiguration>().ToConstant(CreatePlatformHotKeyConfiguration())
 			.Bind<ManagedFileDialogOptions>()
 			.ToConstant(new ManagedFileDialogOptions { AllowDirectorySelection = true });

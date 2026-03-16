@@ -5,10 +5,10 @@ using Avalonia.Platform;
 
 namespace Estragonia;
 
-internal sealed class GodotCursorFactory : ICursorFactory
+internal sealed class GdCursorFactory : ICursorFactory
 {
 	public ICursorImpl GetCursor(StandardCursorType cursorType) =>
-		new GodotStandardCursorImpl(cursorType.ToGodotCursorShape());
+		new GdStandardCursorImpl(cursorType.ToGodotCursorShape());
 
 	public ICursorImpl CreateCursor(IBitmapImpl cursor, PixelPoint hotSpot) =>
 		throw new NotSupportedException("Custom cursors aren't supported");

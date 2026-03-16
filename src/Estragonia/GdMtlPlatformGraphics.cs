@@ -7,14 +7,14 @@ using Avalonia.Platform;
 namespace Estragonia;
 
 /// <summary>Godot Metal-based <see cref="IPlatformGraphics" /> implementation.</summary>
-internal sealed class GodotMtlPlatformGraphics : IGodotPlatformGraphics
+internal sealed class GdMtlPlatformGraphics : IGdPlatformGraphics
 {
-	private GodotMtlSkiaGpu? _context;
+	private GdMtlSkiaGpu? _context;
 	private int _refCount;
 
 	bool IPlatformGraphics.UsesSharedContext => true;
 
-	public IGodotSkiaGpu GetSharedContext()
+	public IGdSkiaGpu GetSharedContext()
 	{
 		if (Volatile.Read(ref _refCount) == 0)
 			ThrowDisposed();
@@ -24,7 +24,7 @@ internal sealed class GodotMtlPlatformGraphics : IGodotPlatformGraphics
 
 		_context?.Dispose();
 		_context = null;
-		_context = new GodotMtlSkiaGpu();
+		_context = new GdMtlSkiaGpu();
 
 		return _context;
 	}
@@ -51,5 +51,5 @@ internal sealed class GodotMtlPlatformGraphics : IGodotPlatformGraphics
 
 	[DoesNotReturn]
 	[MethodImpl(MethodImplOptions.NoInlining)]
-	private static void ThrowDisposed() => throw new ObjectDisposedException(nameof(GodotMtlPlatformGraphics));
+	private static void ThrowDisposed() => throw new ObjectDisposedException(nameof(GdMtlPlatformGraphics));
 }

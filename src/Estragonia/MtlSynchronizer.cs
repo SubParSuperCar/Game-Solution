@@ -12,7 +12,7 @@ internal sealed class MtlSynchronizer : ISurfaceSynchronizer
 	private bool _gpuBlitFailed;
 
 	/// <summary>Prepares the surface for Skia rendering.</summary>
-	public void PrepareForRendering(IGodotSkiaSurface surface)
+	public void PrepareForRendering(IGdSkiaSurface surface)
 	{
 		// Clear the texture on first draw to avoid corruption on some GPUs
 		if (surface.DrawCount == 0)
@@ -20,7 +20,7 @@ internal sealed class MtlSynchronizer : ISurfaceSynchronizer
 	}
 
 	/// <summary>Finalizes rendering by blitting from Skia surface to Godot texture.</summary>
-	public void FinishRendering(IGodotSkiaSurface surface)
+	public void FinishRendering(IGdSkiaSurface surface)
 	{
 		var skSurface = surface.SkSurface;
 
@@ -28,7 +28,7 @@ internal sealed class MtlSynchronizer : ISurfaceSynchronizer
 		skSurface.Flush();
 
 		// Check if this is a zero-copy surface (renders directly to Godot's texture)
-		if (surface is GodotSkiaSurfaceMetal { IsZeroCopy: true })
+		if (surface is GdSkiaSurfaceMtl { IsZeroCopy: true })
 		{
 			// No copy needed - Skia rendered directly to Godot's texture
 			surface.DrawCount++;
@@ -36,7 +36,7 @@ internal sealed class MtlSynchronizer : ISurfaceSynchronizer
 		}
 
 		// Try GPU-to-GPU blit if we have a Metal surface
-		if (!_gpuBlitFailed && surface is GodotSkiaSurfaceMetal mtlSurface)
+		if (!_gpuBlitFailed && surface is GdSkiaSurfaceMtl mtlSurface)
 		{
 			if (TryGpuBlit(mtlSurface))
 			{
@@ -59,7 +59,7 @@ internal sealed class MtlSynchronizer : ISurfaceSynchronizer
 		// No resources to dispose for Metal synchronizer
 	}
 
-	private static bool TryGpuBlit(GodotSkiaSurfaceMetal surface)
+	private static bool TryGpuBlit(GdSkiaSurfaceMtl surface)
 	{
 		// Get Skia's Metal texture from its surface
 		var skiaTexture = MtlInterop.GetSurfaceMetalTexture(surface.SkSurface);
@@ -78,7 +78,7 @@ internal sealed class MtlSynchronizer : ISurfaceSynchronizer
 		// Perform GPU blit from Skia texture to Godot texture
 	}
 
-	private static void CpuCopy(IGodotSkiaSurface surface)
+	private static void CpuCopy(IGdSkiaSurface surface)
 	{
 		var skSurface = surface.SkSurface;
 		var canvas = skSurface.Canvas;

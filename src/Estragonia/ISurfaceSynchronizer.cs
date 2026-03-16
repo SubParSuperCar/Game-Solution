@@ -7,9 +7,9 @@ internal interface ISurfaceSynchronizer : IDisposable
 {
 	/// <summary>Prepares the surface for Skia rendering.</summary>
 	/// <param name="surface">The surface to prepare.</param>
-	void PrepareForRendering(IGodotSkiaSurface surface);
+	void PrepareForRendering(IGdSkiaSurface surface);
 
 	/// <summary>Finalizes rendering and prepares the surface for Godot consumption.</summary>
 	/// <param name="surface">The surface to finalize.</param>
-	void FinishRendering(IGodotSkiaSurface surface);
+	void FinishRendering(IGdSkiaSurface surface);
 }

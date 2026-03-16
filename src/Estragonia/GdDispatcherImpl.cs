@@ -14,7 +14,7 @@ namespace Estragonia;
 	"CA1001:Types that own disposable fields should be disposable",
 	Justification = "This type has equivalent to a static lifetime"
 )]
-internal sealed class GodotDispatcherImpl : IDispatcherImpl
+internal sealed class GdDispatcherImpl : IDispatcherImpl
 {
 	private readonly SendOrPostCallback _invokeSignaled; // Cached delegate
 	private readonly SendOrPostCallback _invokeTimer; // Cached delegate
@@ -22,7 +22,7 @@ internal sealed class GodotDispatcherImpl : IDispatcherImpl
 	private readonly Thread _mainThread;
 	private readonly SysTimer _timer;
 
-	public GodotDispatcherImpl(Thread mainThread)
+	public GdDispatcherImpl(Thread mainThread)
 	{
 		_mainThread = mainThread;
 		_invokeSignaled = InvokeSignaled;

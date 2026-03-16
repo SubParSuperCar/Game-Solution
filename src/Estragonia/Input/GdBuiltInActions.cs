@@ -3,7 +3,7 @@
 namespace Estragonia.Input;
 
 /// <summary>Contains the names of various Godot built-in actions that are recognized by Estragonia.</summary>
-public static class GodotBuiltInActions
+public static class GdBuiltInActions
 {
 	/// <summary>Action name: ui_focus_next</summary>
 	public static readonly StringName UiFocusNext = "ui_focus_next";

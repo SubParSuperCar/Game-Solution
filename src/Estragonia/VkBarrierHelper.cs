@@ -19,9 +19,9 @@ internal sealed class VkBarrierHelper(VkDevice device, VkQueue queue, VkDeviceAp
 	private bool _isDisposed;
 
 	/// <summary>Prepares the surface for Skia rendering by transitioning to COLOR_ATTACHMENT_OPTIMAL.</summary>
-	public void PrepareForRendering(IGodotSkiaSurface surface)
+	public void PrepareForRendering(IGdSkiaSurface surface)
 	{
-		if (surface is not GodotSkiaSurface vkSurface)
+		if (surface is not GdSkiaSurface vkSurface)
 			throw new ArgumentException("Surface must be a Vulkan surface", nameof(surface));
 
 		// Clear the texture on first draw. This is already done by Avalonia, but Godot doesn't know that.
@@ -34,9 +34,9 @@ internal sealed class VkBarrierHelper(VkDevice device, VkQueue queue, VkDeviceAp
 	}
 
 	/// <summary>Finalizes rendering by transitioning back to SHADER_READ_ONLY_OPTIMAL for Godot.</summary>
-	public void FinishRendering(IGodotSkiaSurface surface)
+	public void FinishRendering(IGdSkiaSurface surface)
 	{
-		if (surface is not GodotSkiaSurface vkSurface)
+		if (surface is not GdSkiaSurface vkSurface)
 			throw new ArgumentException("Surface must be a Vulkan surface", nameof(surface));
 
 		vkSurface.SkSurface.Flush(true);
