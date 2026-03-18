@@ -13,11 +13,11 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
-		<GdLauncherScriptExt>.cmd</GdLauncherScriptExt>
+		<GdLauncherScriptExt>cmd</GdLauncherScriptExt>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
-		<GdLauncherScriptExt>.sh</GdLauncherScriptExt>
+		<GdLauncherScriptExt>sh</GdLauncherScriptExt>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -41,7 +41,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore Game.sln
 
-      - name: Build
+      - name: Build (${{ matrix.configuration }})
         run: dotnet build Game.sln --no-restore --configuration ${{ matrix.configuration }}
 
       - name: Package source archive
