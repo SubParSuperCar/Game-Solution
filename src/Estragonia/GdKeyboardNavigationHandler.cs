@@ -4,7 +4,7 @@ namespace Estragonia;
 
 /// <summary>
 ///     An implementation of <see cref="IKeyboardNavigationHandler" /> that does NOT listen for tab.
-///     Focus navigation is done using the built-in Godot actions instead, inside <see cref="AvaloniaControl" />.
+///     Focus navigation is done using the built-in Godot actions instead, inside <see cref="AvControl" />.
 /// </summary>
 internal sealed class GdKeyboardNavigationHandler : IKeyboardNavigationHandler
 {

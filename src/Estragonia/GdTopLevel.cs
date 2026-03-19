@@ -6,7 +6,7 @@ namespace Estragonia;
 
 /// <summary>
 ///     A <see cref="TopLevel" /> used with Godot.
-///     This is implicitly created by <see cref="AvaloniaControl" />.
+///     This is implicitly created by <see cref="AvControl" />.
 /// </summary>
 public sealed class GdTopLevel : EmbeddableControlRoot
 {

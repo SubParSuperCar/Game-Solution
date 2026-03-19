@@ -6,7 +6,7 @@ using Godot;
 // ReSharper disable once CheckNamespace
 namespace Game;
 
-public sealed partial class UserInterface : AvaloniaControl
+public sealed partial class UserInterface : AvControl
 {
 	private MainViewModel _mainViewModel = null!;
 

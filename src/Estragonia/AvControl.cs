@@ -7,7 +7,7 @@ using Avalonia.Platform;
 using Estragonia.Input;
 using Godot;
 using Godot.NativeInterop;
-using AvControl = Avalonia.Controls.Control;
+using Control = Avalonia.Controls.Control;
 using GdControl = Godot.Control;
 using GdInput = Godot.Input;
 using GdKey = Godot.Key;
@@ -15,14 +15,14 @@ using GdKey = Godot.Key;
 namespace Estragonia;
 
 /// <summary>Renders an Avalonia control and forwards input to it.</summary>
-public class AvaloniaControl : GdControl
+public class AvControl : GdControl
 {
-	private AvControl? _control;
+	private Control? _control;
 	private double _renderScaling = 1.0;
 	private GdTopLevel? _topLevel;
 
 	/// <summary>Gets or sets the underlying Avalonia control that will be rendered.</summary>
-	protected AvControl? Control
+	protected Control? Control
 	{
 		get => _control;
 		set

@@ -1,20 +1,26 @@
 @echo off
 setlocal
 
-echo Windows NT (CMD)
+echo Runtime context: Windows NT (CMD)
 
-for %%G in (godot.exe godot4.exe) do (
-    where %%G >nul 2>nul && (
-        %%G %*
+set "PATH_CANDIDATES=godot.exe godot4.exe"
+
+for %%G in (%PATH_CANDIDATES%) do (
+    for /f "delims=" %%P in (`where %%G 2^>nul`) do (
+        echo Found via PATH (%%G): %%P
+        "%%P" %*
         exit /b
     )
 )
 
 set "SCRIPT_DIR=%~dp0"
-if exist "%SCRIPT_DIR%bin\godot.exe" (
-    "%SCRIPT_DIR%bin\godot.exe" %*
+set "GODOT_PATH=%SCRIPT_DIR%bin\godot.exe"
+
+if exist "%GODOT_PATH%" (
+    echo Found via local bin: "%GODOT_PATH%"
+    "%GODOT_PATH%" %*
     exit /b
 )
 
-echo Godot not found.
+echo Godot not found via PATH or local bin.
 exit /b 1
