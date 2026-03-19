@@ -1,4 +1,7 @@
 bin/
 obj/
+
 .godot/
 .idea/
+
+**/export_presets.cfg

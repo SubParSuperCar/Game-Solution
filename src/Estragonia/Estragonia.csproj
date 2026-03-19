@@ -24,6 +24,8 @@
 		<None Include="LICENSE.txt">
 			<Link>Project Items/LICENSE.txt</Link>
 		</None>
+
+		<None Remove=".gdignore"/>
 	</ItemGroup>
 
 	<Target Name="EstragoniaReferenceAvaloniaRuntimeAssemblies"
