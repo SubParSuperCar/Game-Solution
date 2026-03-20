@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://djxmiu8uv8dd"
-path.s3tc="res://.godot/imported/gdav_sphere_gdav.png-2e14ad84caa1ba3f56e2a2c90ec2ccd4.s3tc.ctex"
+path.s3tc="res://.godot/imported/gdav_sphere_gdav.png-56800998156d29b89f04a9b2257316f6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Game/models/gdav_sphere_gdav.png"
-dest_files=["res://.godot/imported/gdav_sphere_gdav.png-2e14ad84caa1ba3f56e2a2c90ec2ccd4.s3tc.ctex"]
+source_file="res://models/gdav_sphere_gdav.png"
+dest_files=["res://.godot/imported/gdav_sphere_gdav.png-56800998156d29b89f04a9b2257316f6.s3tc.ctex"]
 
 [params]
 

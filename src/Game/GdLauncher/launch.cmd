@@ -13,8 +13,7 @@ for %%G in (%PATH_CANDIDATES%) do (
     )
 )
 
-set "SCRIPT_DIR=%~dp0"
-set "GODOT_PATH=%SCRIPT_DIR%bin\godot.exe"
+set "GODOT_PATH=%~dp0\bin\godot.exe"
 
 if exist "%GODOT_PATH%" (
     echo Found via local bin: "%GODOT_PATH%"

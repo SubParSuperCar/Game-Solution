@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Game"
-run/main_scene="res://Game/scenes/main.tscn"
-config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://Game/icon.svg"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+config/icon="res://icon.svg"
 
 [autoload]
 
-AvaloniaLoader="res://Game/UI/AvaloniaLoader.cs"
+AvaloniaLoader="res://UI/AvaloniaLoader.cs"
 
 [dotnet]
 

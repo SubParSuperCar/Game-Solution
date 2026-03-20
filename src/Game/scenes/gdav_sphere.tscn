@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bbbyyy7v6v5m0"]
 
-[ext_resource type="PackedScene" uid="uid://cth27tfowexm" path="res://Game/models/gdav_sphere.glb" id="1_asbc4"]
-[ext_resource type="Script" uid="uid://dmtnbcsfei33j" path="res://Game/scripts/GdAvSphere.cs" id="2_2lpsc"]
+[ext_resource type="PackedScene" uid="uid://cth27tfowexm" path="res://models/gdav_sphere.glb" id="1_asbc4"]
+[ext_resource type="Script" uid="uid://dmtnbcsfei33j" path="res://scripts/GdAvSphere.cs" id="2_2lpsc"]
 
 [node name="GdAvSphereRoot" unique_id=1812474524 instance=ExtResource("1_asbc4")]
 

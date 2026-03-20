@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://da3muawu74543"]
 
-[ext_resource type="PackedScene" uid="uid://bbbyyy7v6v5m0" path="res://Game/scenes/gdav_sphere.tscn" id="1_xpgo1"]
+[ext_resource type="PackedScene" uid="uid://bbbyyy7v6v5m0" path="res://scenes/gdav_sphere.tscn" id="1_xpgo1"]
 
 [node name="GameRoot" type="Node3D" unique_id=343751463]
 

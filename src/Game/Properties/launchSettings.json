@@ -5,14 +5,14 @@
       "commandName": "Executable",
       "executablePath": "GdLauncher/launch.$(GdLauncherScriptExt)",
       "workingDirectory": "$(ProjectDir)",
-      "commandLineArgs": "--path \"$(ProjectDir)",
+      "commandLineArgs": "--path \"$(ProjectDir)\"",
       "nativeDebugging": true
     },
     "Editor": {
       "commandName": "Executable",
       "executablePath": "GdLauncher/launch.$(GdLauncherScriptExt)",
       "workingDirectory": "$(ProjectDir)",
-      "commandLineArgs": "--editor --path \"$(ProjectDir)",
+      "commandLineArgs": "--editor --path \"$(ProjectDir)\"",
       "nativeDebugging": true
     }
   }
