@@ -35,7 +35,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="Properties\launchSettings.json" />
+		<None Include="Properties\launchSettings.json"/>
 		<None Include="shaders/*.gdshader"/>
 		<None Include="GdLauncher/**/*"/>
 	</ItemGroup>

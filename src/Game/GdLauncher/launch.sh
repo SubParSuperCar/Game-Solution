@@ -2,9 +2,9 @@
 
 echo "Runtime context: POSIX Shell"
 
-PATH_CANDIDATES="godot godot4"
+GD_CANDIDATES="godot godot4"
 
-for name in $PATH_CANDIDATES; do
+for name in $GD_CANDIDATES; do
     path="$(command -v "$name" 2>/dev/null)"
     if [ -n "$path" ]; then
         echo "Found via PATH ($name): $path"

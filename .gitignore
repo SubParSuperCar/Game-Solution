@@ -2,6 +2,7 @@ bin/
 obj/
 
 .godot/
+.idea/
 .vs/
 
 **/export_presets.cfg

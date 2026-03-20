@@ -3,9 +3,9 @@ setlocal
 
 echo Runtime context: Windows NT (CMD)
 
-set "PATH_CANDIDATES=godot.exe godot4.exe"
+set "GD_PATH_CANDIDATES=godot.exe godot4.exe"
 
-for %%G in (%PATH_CANDIDATES%) do (
+for %%G in (%GD_PATH_CANDIDATES%) do (
     for /f "delims=" %%P in (`where %%G 2^>nul`) do (
         echo Found via PATH (%%G): %%P
         "%%P" %*
@@ -13,11 +13,12 @@ for %%G in (%PATH_CANDIDATES%) do (
     )
 )
 
-set "GODOT_PATH=%~dp0\bin\godot.exe"
+set "SCRIPT_DIR=%~dp0"
+set "GD_PATH=%SCRIPT_DIR%\bin\godot.exe"
 
-if exist "%GODOT_PATH%" (
-    echo Found via local bin: "%GODOT_PATH%"
-    "%GODOT_PATH%" %*
+if exist "%GD_PATH%" (
+    echo Found via local bin: "%GD_PATH%"
+    "%GD_PATH%" %*
     exit /b
 )
 
