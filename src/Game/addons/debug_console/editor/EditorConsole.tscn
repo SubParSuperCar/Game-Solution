@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bj2fg3l0yw5a8" path="res://addons/debug_console/editor/EditorConsole.gd" id="1_8x2yz"]
 
-[node name="EditorConsole" type="Control" unique_id=1299055552]
+[node name="EditorConsole" type="Control" unique_id=1694139872]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8x2yz")
 
-[node name="VBox" type="VBoxContainer" parent="." unique_id=547069003]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1554247295]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,22 +19,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HeaderPanel" type="HBoxContainer" parent="VBox" unique_id=156263161]
+[node name="HeaderPanel" type="HBoxContainer" parent="VBox" unique_id=203305593]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="TitleLabel" type="Label" parent="VBox/HeaderPanel" unique_id=1181177106]
+[node name="TitleLabel" type="Label" parent="VBox/HeaderPanel" unique_id=1918405835]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Debug Console"
 vertical_alignment = 1
 
-[node name="OutputPanel" type="Panel" parent="VBox" unique_id=1030722481]
+[node name="OutputPanel" type="Panel" parent="VBox" unique_id=1507338118]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="OutputText" type="RichTextLabel" parent="VBox/OutputPanel" unique_id=2140833010]
+[node name="OutputText" type="RichTextLabel" parent="VBox/OutputPanel" unique_id=1312682827]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,18 +50,18 @@ bbcode_enabled = true
 scroll_following = true
 selection_enabled = true
 
-[node name="InputPanel" type="HBoxContainer" parent="VBox" unique_id=431339344]
+[node name="InputPanel" type="HBoxContainer" parent="VBox" unique_id=916288246]
 layout_mode = 2
 
-[node name="InputLine" type="LineEdit" parent="VBox/InputPanel" unique_id=1150458984]
+[node name="InputLine" type="LineEdit" parent="VBox/InputPanel" unique_id=1486132280]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Enter command..."
 
-[node name="SendButton" type="Button" parent="VBox/InputPanel" unique_id=1159952719]
+[node name="SendButton" type="Button" parent="VBox/InputPanel" unique_id=1911566128]
 layout_mode = 2
 text = "Send"
 
-[node name="ClearButton" type="Button" parent="VBox/InputPanel" unique_id=1407976312]
+[node name="ClearButton" type="Button" parent="VBox/InputPanel" unique_id=780090267]
 layout_mode = 2
 text = "Clear"
