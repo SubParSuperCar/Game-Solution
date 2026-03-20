@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 AvaloniaLoader="res://UI/AvaloniaLoader.cs"
+DebugConsole="*uid://bux31q5461njr"
 
 [dotnet]
 
