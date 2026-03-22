@@ -6,7 +6,7 @@ using Godot;
 // ReSharper disable once CheckNamespace
 namespace Game;
 
-public sealed partial class AvUI : AvControl
+public sealed partial class AvUi : AvControl
 {
 	private MainViewModel _mainViewModel = null!;
 
