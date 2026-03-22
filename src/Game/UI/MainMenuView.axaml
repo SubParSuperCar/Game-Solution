@@ -26,7 +26,7 @@
 
 	<ui:View.Styles>
 		<Style Selector="Panel.title > TextBlock">
-			<Setter Property="Text" Value="Certain Game" />
+			<Setter Property="Text" Value="Sample Game" />
 			<Setter Property="FontSize" Value="{StaticResource MainTitleFontSize}" />
 			<Setter Property="FontWeight" Value="Black" />
 			<Setter Property="TextDecorations" Value="Underline" />

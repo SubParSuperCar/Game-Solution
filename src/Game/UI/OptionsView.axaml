@@ -27,7 +27,7 @@
 	</Design.DataContext>
 
 	<ui:View.Resources>
-		<converters:BooleanToOnOffConverter x:Key="BooleanToOnOffConverter" />
+		<converters:BoolToOnOffConverter x:Key="BooleanToOnOffConverter" />
 	</ui:View.Resources>
 
 	<ui:View.Styles>

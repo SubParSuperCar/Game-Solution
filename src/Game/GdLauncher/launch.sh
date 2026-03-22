@@ -13,11 +13,11 @@ for name in $GD_CANDIDATES; do
 done
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
-GODOT_PATH="$SCRIPT_DIR/bin/godot"
+GD_PATH="$SCRIPT_DIR/bin/godot"
 
-if [ -x "$GODOT_PATH" ]; then
-    echo "Found via local bin: $GODOT_PATH"
-    exec "$GODOT_PATH" "$@"
+if [ -x "$GD_PATH" ]; then
+    echo "Found via local bin: $GD_PATH"
+    exec "$GD_PATH" "$@"
 fi
 
 echo "Godot not found via PATH or local bin." >&2

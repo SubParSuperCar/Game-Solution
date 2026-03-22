@@ -21,7 +21,7 @@ public sealed partial class GameLoadingViewModel(INavigator navigator) : ViewMod
 	{
 		await Task.Delay(TimeSpan.FromSeconds(0.4));
 
-		var gameScene = await AsyncGodotResourceLoader.LoadAsync<PackedScene>(
+		var gameScene = await AsyncGdResourceLoader.LoadAsync<PackedScene>(
 			"res://scenes/game.tscn",
 			ResourceLoader.CacheMode.Ignore,
 			new SceneLoadProgress(this)

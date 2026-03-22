@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.6.0">
+﻿<Project Sdk="Godot.NET.Sdk/4.6.1">
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
@@ -6,41 +6,33 @@
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 	</PropertyGroup>
-
 	<PropertyGroup Condition="$(Configuration) == 'Debug'">
 		<OutputType>Exe</OutputType>
 		<UseAppHost>false</UseAppHost>
 	</PropertyGroup>
-
 	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
 		<GdLauncherScriptExt>cmd</GdLauncherScriptExt>
 	</PropertyGroup>
-
 	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
 		<GdLauncherScriptExt>sh</GdLauncherScriptExt>
 	</PropertyGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Avalonia.Themes.Simple" Version="11.3.0"/>
 		<PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.2.0.1"/>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
 	</ItemGroup>
-
 	<ItemGroup>
-		<ProjectReference Include="../Estragonia/Estragonia.csproj"/>
+		<ProjectReference Include="..\lib\Estragonia\Estragonia.csproj"/>
 	</ItemGroup>
-
 	<ItemGroup>
-		<AvaloniaResource Include="UI/Fonts/*.ttf"/>
+		<AvaloniaResource Include="UI\Fonts\*.ttf"/>
 	</ItemGroup>
-
 	<ItemGroup>
 		<None Include="Properties\launchSettings.json"/>
-		<None Include="shaders/*.gdshader"/>
-		<None Include="GdLauncher/**/*"/>
+		<None Include="shaders\*.gdshader"/>
+		<None Include="GdLauncher\**\*"/>
 	</ItemGroup>
-
 	<ItemGroup>
-		<Content Include="UI/Fonts/OFL.txt"/>
+		<Content Include="UI\Fonts\OFL.txt"/>
 	</ItemGroup>
 </Project>
