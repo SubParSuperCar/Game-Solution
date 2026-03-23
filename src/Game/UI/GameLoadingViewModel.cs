@@ -9,13 +9,24 @@ namespace Game.UI;
 public sealed partial class GameLoadingViewModel(INavigator navigator) : ViewModel
 {
 	// We're loading an almost empty scene: it's nearly instantaneous.
-	// For demo purposes (we want to show the loading screen), set the real loading to be 10% of the total loading,
+	// For demo purposes (we want to show the loading screen), set the real loading to be 50% of the total loading,
 	// and simulate the rest by waiting.
-	private const double RealProgressRatio = 0.1;
+	private const double RealProgressRatio = 0.5;
 
 	[ObservableProperty] private bool _isLoading = true;
 
 	[ObservableProperty] private double _loadingProgress;
+
+	// Tracks each component independently so that a late real-progress report
+	// can never move the bar backward past what the simulated progress already showed.
+	private double _realProgress;
+	private double _simulatedProgress;
+
+	private void UpdateLoadingProgress()
+		=> LoadingProgress = Math.Max(
+			_realProgress * RealProgressRatio,
+			RealProgressRatio + _simulatedProgress * (1.0 - RealProgressRatio)
+		);
 
 	protected override async Task LoadAsync()
 	{
@@ -44,18 +55,20 @@ public sealed partial class GameLoadingViewModel(INavigator navigator) : ViewMod
 		var delayInMs = (double)Random.Shared.Next(2000, 3000);
 		var stopwatch = Stopwatch.StartNew();
 
-		var fakeProgress = 0.0;
-
-		while (fakeProgress < 1.0)
+		while (_simulatedProgress < 1.0)
 		{
 			await Task.Delay(TimeSpan.FromSeconds(0.1));
-			fakeProgress = Math.Min(1.0, stopwatch.ElapsedMilliseconds / delayInMs);
-			LoadingProgress = RealProgressRatio + fakeProgress * (1.0 - RealProgressRatio);
+			_simulatedProgress = Math.Min(1.0, stopwatch.ElapsedMilliseconds / delayInMs);
+			UpdateLoadingProgress();
 		}
 	}
 
 	private sealed class SceneLoadProgress(GameLoadingViewModel owner) : IProgress<double>
 	{
-		public void Report(double value) => owner.LoadingProgress = value * RealProgressRatio;
+		public void Report(double value)
+		{
+			owner._realProgress = value;
+			owner.UpdateLoadingProgress();
+		}
 	}
 }

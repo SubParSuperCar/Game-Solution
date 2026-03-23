@@ -7,29 +7,24 @@ namespace Game.UI;
 
 public sealed partial class OptionsViewModel(UiOptions uiOptions) : ViewModel
 {
-	private bool _canApply;
-
 	[ObservableProperty] private bool _fullscreen = uiOptions.Fullscreen;
 	[ObservableProperty] private bool _showFps = uiOptions.ShowFps;
 	[ObservableProperty] private double _uiScale = uiOptions.UiScale;
 	[ObservableProperty] private bool _vSync = uiOptions.VSync;
 
-	public bool CanApply
-	{
-		get => _canApply;
-		private set
-		{
-			if (SetProperty(ref _canApply, value))
-				ApplyCommand.NotifyCanExecuteChanged();
-		}
-	}
+	public bool CanApply =>
+		VSync != uiOptions.VSync
+		|| Fullscreen != uiOptions.Fullscreen
+		|| ShowFps != uiOptions.ShowFps
+		// ReSharper disable once CompareOfFloatsByEqualityOperator
+		|| UiScale != uiOptions.UiScale;
 
 	protected override void OnPropertyChanged(PropertyChangedEventArgs e)
 	{
 		base.OnPropertyChanged(e);
 
 		if (e.PropertyName is nameof(VSync) or nameof(Fullscreen) or nameof(ShowFps) or nameof(UiScale))
-			CanApply = true;
+			ApplyCommand.NotifyCanExecuteChanged();
 	}
 
 	protected override Task LoadAsync() => Task.CompletedTask;
@@ -41,6 +36,6 @@ public sealed partial class OptionsViewModel(UiOptions uiOptions) : ViewModel
 		uiOptions.Fullscreen = Fullscreen;
 		uiOptions.ShowFps = ShowFps;
 		uiOptions.UiScale = UiScale;
-		CanApply = false;
+		ApplyCommand.NotifyCanExecuteChanged();
 	}
 }
