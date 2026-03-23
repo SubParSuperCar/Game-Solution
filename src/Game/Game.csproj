@@ -29,8 +29,16 @@
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="Properties\launchSettings.json"/>
-		<None Include="shaders\*.gdshader"/>
 		<None Include="GdLauncher\**\*"/>
+		<None Include="addons\**\*">
+			<Link>Godot Items\addons\%(RecursiveDir)%(Filename)%(Extension)</Link>
+		</None>
+		<None Include="scenes\**\*">
+			<Link>Godot Items\scenes\%(RecursiveDir)%(Filename)%(Extension)</Link>
+		</None>
+		<None Include="shaders\**\*">
+			<Link>Godot Items\shaders\%(RecursiveDir)%(Filename)%(Extension)</Link>
+		</None>
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="UI\Fonts\OFL.txt"/>

@@ -19,7 +19,7 @@ class Parameter:
 	var name: String
 	var type: ParameterType
 	var options: Array
-	
+
 	func _init(name:String, type:ParameterType, options:Array=[]):
 		self.name = name
 		self.type = type

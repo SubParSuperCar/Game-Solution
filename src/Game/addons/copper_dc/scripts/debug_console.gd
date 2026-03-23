@@ -6,7 +6,7 @@ class Monitor:
 	var displayName: String
 	var value: Variant
 	var visible: bool
-	
+
 	func _init(id:String, displayName:String, value:Variant, visible:bool):
 		self.id = id
 		self.displayName = displayName
@@ -42,7 +42,7 @@ var showMiniLog = false
 func _ready():
 	hide_console()
 	logScrollBar.connect("changed", _on_scrollbar_changed)
-	
+
 	# Register built-in monitors
 	add_monitor("fps", "FPS")
 	add_monitor("process", "Process", false)
@@ -52,7 +52,7 @@ func _ready():
 	add_monitor("static_memory_max", "Static Memory Max", false)
 	add_monitor("objects", "Objects", false)
 	add_monitor("nodes", "Nodes", false)
-	
+
 	# Register built-in commands
 	await get_tree().create_timer(0.05).timeout
 	_BuiltInCommands.new().init()
@@ -78,7 +78,7 @@ func _process(delta):
 			update_monitor("objects", Performance.get_monitor(Performance.OBJECT_COUNT))
 		if is_monitor_visible("nodes"):
 			update_monitor("nodes", Performance.get_monitor(Performance.OBJECT_NODE_COUNT))
-		
+
 		stats.text = ""
 		for monitor in monitors.values():
 			if monitor.visible:
@@ -132,7 +132,7 @@ func _is_tab_press(event: InputEvent):
 		return false
 	var key_event := event as InputEventKey
 	return key_event.keycode == KEY_TAB and key_event.pressed and not key_event.echo
-	
+
 func _attempt_autocompletion():
 	# Populate the hints label with words we could autocomplete
 	_on_command_field_text_changed(commandField.text)
@@ -170,7 +170,7 @@ func _on_command_field_text_changed(new_text):
 		commandHintsPanel.visible = true
 		commandHintHeader.visible = true
 		commandHintsLabel.text = ""
-		
+
 		# Get parameters filled
 		var parameterCount = 0
 		var readingString = false
@@ -253,7 +253,7 @@ func process_command(command):
 	# Keeps track of current parameter being read
 	var commandData = commands[commandSplit[0]]
 	var currentParameter = 0
-	
+
 	# Checks that function is not lambda
 	if commandData.function.get_method() == "<anonymous lambda>":
 		DebugConsole.log_error("Command function must be named.")
@@ -269,7 +269,7 @@ func process_command(command):
 			DebugConsole.log_error("Command \"" + commandData.id + "\" requires " + str(commandData.parameters.size()) + " parameters, but too many were given.")
 			return
 		var currentParameterObj: DebugCommand.Parameter = commandData.parameters[currentParameter]
-		
+
 		# Int parameter
 		if currentParameterObj.type == DebugCommand.ParameterType.Int:
 			if !commandSplit[i].is_valid_int():
@@ -338,12 +338,12 @@ func process_command(command):
 		else:
 			DebugConsole.log_error("Parameter \"" + currentParameterObj.name + "\" received an invalid value.")
 			return
-		
+
 	# Checks if all parameters are entered
 	if commandData.parameters.size() != currentParameter:
 		DebugConsole.log_error("Command " + commandData.id + " requires " + str(commandData.parameters.size()) + " parameters, but only " + str(currentParameter) + " were given.")
 		return
-		
+
 	commandFunction += ")"
 
 	var expression = Expression.new()
@@ -360,7 +360,7 @@ static func log(message):
 	# Add to log
 	get_console().consoleLog.append(message)
 	_update_log()
-	
+
 	# Print to Godot output
 	print(str(message))
 
@@ -368,7 +368,7 @@ static func log_error(message):
 	# Add to log
 	get_console().consoleLog.append("[color=red]"+str(message)+"[/color]")
 	_update_log()
-	
+
 	# Print to Godot output
 	printerr(str(message))
 
@@ -401,7 +401,7 @@ static func remove_commands(ids:Array[String]):
 
 #region Monitors
 static func add_monitor(id, displayName, visible:bool=true):
-	if id.contains(" "): 
+	if id.contains(" "):
 		DebugConsole.log_error("Monitor id \"" + id + "\"" + "needs to be a single word.")
 		return
 	elif get_console().monitors.keys().has(id):
@@ -438,7 +438,7 @@ static func hide_console(showStats:bool=false, showMiniLog:bool=false):
 	console.miniLog.visible = showMiniLog
 	await console.get_tree().create_timer(0.01).timeout
 	console.miniLog.scroll_vertical = console.miniLogScrollBar.max_value
-	
+
 	if console.pauseOnOpen: console.get_tree().paused = false
 
 static func show_console():
@@ -446,7 +446,7 @@ static func show_console():
 	console.consolePanel.visible = true
 	console.stats.visible = true
 	console.miniLog.visible = false
-	
+
 	if console.pauseOnOpen: console.get_tree().paused = true
 
 static func is_console_visible() -> bool:
@@ -464,7 +464,7 @@ static func _update_log():
 	var logText = ""
 	for line in console.consoleLog:
 		logText += str(line) + "\n"
-	
+
 	console.logField.get_node("MarginContainer/Log Content").text = logText
 	console.miniLog.get_node("MarginContainer/Log Content").text = "[right]" + logText
 #endregion
