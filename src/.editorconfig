@@ -10,7 +10,7 @@ max_line_length = 120
 indent_style = tab
 indent_size = 4
 
-[*.{json,yml,yaml,cmd,sh}]
+[*.{json,xml,yml,yaml,cmd,sh}]
 indent_style = space
 indent_size = 2
 
