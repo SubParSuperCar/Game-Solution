@@ -11,7 +11,7 @@ public sealed partial class GameLoadingViewModel(INavigator navigator) : ViewMod
 	// We're loading an almost empty scene: it's nearly instantaneous.
 	// For demo purposes (we want to show the loading screen), set the real loading to be 50% of the total loading,
 	// and simulate the rest by waiting.
-	private const double RealProgressRatio = 1f / 8f;
+	private const double RealProgressRatio = 1f / 3f;
 
 	[ObservableProperty] private bool _isLoading = true;
 
