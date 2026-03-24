@@ -17,13 +17,6 @@ namespace Estragonia;
 /// <summary>Renders an Avalonia control and forwards input to it.</summary>
 public class AvControl : GdControl
 {
-	/// <summary>
-	///     Whether some Godot UI actions will be automatically mapped to an
-	///     <see cref="InputElement.KeyDownEvent" /> event.
-	///     The mapped actions are ui_left, ui_right, ui_up, ui_down, ui_accept and ui_cancel.
-	/// </summary>
-	private const bool AutoConvertUiActionToKeyDown = true;
-
 	private Control? _control;
 	private double _renderScaling = 1.0;
 	private GdTopLevel? _topLevel;
@@ -56,6 +49,16 @@ public class AvControl : GdControl
 			QueueRedraw();
 		}
 	}
+
+	/// <summary>
+	///     Gets or sets whether some Godot UI actions will be automatically mapped to an
+	///     <see cref="InputElement.KeyDownEvent" />
+	///     event.
+	///     The mapped actions are ui_left, ui_right, ui_up, ui_down, ui_accept and ui_cancel.
+	///     Defaults to true.
+	/// </summary>
+	// ReSharper disable once MemberCanBePrivate.Global
+	public static bool AutoConvertUiActionToKeyDown => true;
 
 	protected override bool InvokeGodotClassMethod(in godot_string_name method, NativeVariantPtrArgs args,
 		out godot_variant ret)
@@ -222,6 +225,8 @@ public class AvControl : GdControl
 
 		if (inputEvent.IsActionPressed(GdBuiltInActions.UiFocusPrev, true, true))
 			return TryMoveFocus(NavigationDirection.Previous, inputEvent);
+
+		if (!AutoConvertUiActionToKeyDown) return false;
 
 		if (inputEvent.IsActionPressed(GdBuiltInActions.UiLeft, true, true))
 			return SimulateKeyDownFromAction(inputEvent, GdKey.Left);

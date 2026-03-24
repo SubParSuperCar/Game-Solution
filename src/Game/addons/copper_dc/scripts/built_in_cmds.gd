@@ -10,35 +10,32 @@ func init():
 		"Clears the console."
 	)
 
-	# Show stats
+	# Keep stats visible
 	DebugConsole.add_command_setvar(
-		"show_stats",
-		_show_stats,
+		"keep_stats_visible",
+		_keep_stats_visible,
 		self,
 		DebugCommand.ParameterType.Bool,
-		"Sets whether the stats in the top left is visible.",
+		"Sets whether the stats in the top left are visible when the console is closed.",
 		_get_stats_shown
 	)
 
-	# Show log
+	# Keep log visible
 	DebugConsole.add_command_setvar(
-		"show_mini_log",
-		_show_log,
+		"keep_log_visible",
+		_keep_log_visible,
 		self,
 		DebugCommand.ParameterType.Bool,
-		"Sets whether the mini log in the top right is visible.",
+		"Sets whether the mini log in the top right is visible when the console is closed.",
 		_get_log_shown
 	)
 
 	# Exec
 	var cfgs = []
 	for file in list_files_in_directory("user://cfg"):
-		var fileSplit = file.split(".")
-		if fileSplit[-1] == "cfg":
-			cfgs.append(fileSplit[0])
-
-	var autoexec = FileAccess.open("user://cfg/autoexec.cfg", FileAccess.READ)
-	if autoexec != null: _exec("autoexec")
+		var file_split = file.split(".")
+		if file_split[0] != "_binds" and file_split[-1] == "cfg":
+			cfgs.append(file_split[0])
 	DebugConsole.add_command(
 		"exec",
 		_exec,
@@ -80,6 +77,57 @@ func init():
 		"Use to get help on any particular command."
 	)
 
+	# Show all binds
+	DebugConsole.add_command(
+		"show_all_binds",
+		_show_all_binds,
+		self,
+		[],
+		"Use to display all binded commands and their corresponding keys."
+	)
+
+	# Bind
+	DebugConsole.add_command(
+		"bind",
+		_bind,
+		self,
+		[
+			DebugCommand.Parameter.new("command", DebugCommand.ParameterType.String),
+			DebugCommand.Parameter.new("keys", DebugCommand.ParameterType.String)
+		],
+		"Use to bind a command to a key, or key combination. Use + to seperate keys in a combination (e.g. F+F6)."
+	)
+
+	# Remove bind
+	DebugConsole.add_command(
+		"remove_bind",
+		_remove_bind,
+		self,
+		[
+			DebugCommand.Parameter.new("keys", DebugCommand.ParameterType.Options, [], _get_binds_text)
+		],
+		"Removes all binds attached to the given key or keys."
+	)
+
+	# Reset binds
+	DebugConsole.add_command(
+		"reset_binds",
+		_reset_binds,
+		self,
+		[],
+		"Resets binds to their original state."
+	)
+
+	var autoexec = FileAccess.open("user://cfg/autoexec.cfg", FileAccess.READ)
+	if autoexec != null: _exec("autoexec")
+
+	var binds_cfg = FileAccess.open("user://cfg/_binds.cfg", FileAccess.READ)
+	if binds_cfg != null:
+		var saved_contents = binds_cfg.get_as_text()
+		_exec("_binds", true)
+		binds_cfg = FileAccess.open("user://cfg/_binds.cfg", FileAccess.WRITE)
+		binds_cfg.store_string(saved_contents)
+
 func list_files_in_directory(path):
 	var files = []
 	if DirAccess.open("user://").dir_exists(path):
@@ -98,35 +146,145 @@ func list_files_in_directory(path):
 		return files
 	return []
 
-func _show_stats(value):
+func _keep_stats_visible(value):
 	var console = DebugConsole.get_console()
-	console.showStats = value
+	console.show_stats = value
 	console.stats.visible = true
 
 func _get_stats_shown():
-	return DebugConsole.get_console().showStats
+	return DebugConsole.get_console().show_stats
 
-func _show_log(value):
+func _keep_log_visible(value):
 	var console = DebugConsole.get_console()
-	console.showMiniLog = value
-	if !console.commandField.visible:
-		console.miniLog.visible = true
+	console.show_mini_log = value
+	if !console.command_field.visible:
+		console.mini_log.visible = true
 
 func _get_log_shown():
-	return DebugConsole.get_console().showMiniLog
+	return DebugConsole.get_console().show_mini_log
 
-func _exec(file):
-	var commands = FileAccess.open("user://cfg/" + file + ".cfg", FileAccess.READ).get_as_text().split("\r\n")
-	var commandCount = 0
+func _exec(file, silent=false):
+	var commands = FileAccess.open("user://cfg/" + file + ".cfg", FileAccess.READ).get_as_text().split("\n")
+	var command_count = 0
 	for command in commands:
 		if command.replace(" ", "") != "":
 			DebugConsole.get_console().process_command(command)
-			commandCount += 1
-	DebugConsole.log("File " + file + ".cfg ran " + str(commandCount) + " commands.")
+			command_count += 1
+	if not silent: DebugConsole.log("File " + file + ".cfg ran " + str(command_count) + " commands.")
 
 func _open_cfg_dir():
+	if not DirAccess.dir_exists_absolute("user://cfg"):
+		DirAccess.make_dir_absolute("user://cfg")
 	OS.shell_open(ProjectSettings.globalize_path("user://cfg"))
 
 func _help(command):
-	var helpText = DebugConsole.get_console().commands[command].helpText
-	DebugConsole.log(command + " - " + (helpText if helpText != "" else "There is no help available."))
+	var help_text = DebugConsole.get_console().commands[command].help_text
+	DebugConsole.log(command + " - " + (help_text if help_text != "" else "There is no help available."))
+
+func _show_all_binds():
+	var binds = DebugConsole.get_console().command_binds
+	if binds.size() == 0:
+		DebugConsole.log("No binds have been created.")
+		return
+	for bind in DebugConsole.get_console().command_binds:
+		var bind_text = bind.keys_display_text + "  -  "
+		for i in range(bind.instructions.size()):
+			if i > 0: bind_text += ",  "
+			var bind_instruction = bind.instructions[i]
+			if bind_instruction.help_text == "":
+				if bind_instruction is DebugConsole.BindCommand:
+					bind_text += "\"" + bind.instructions[i].command + "\""
+				else:
+					bind_text += "Undescribed function"
+			else:
+				bind_text += bind.instructions[i].help_text
+		DebugConsole.log(bind_text)
+
+func _bind(command, keys):
+	var keys_text_split = keys.split("+")
+	var keycodes: Array[Key] = []
+	for key in keys_text_split:
+		var key_trimmed = key.replace(" ", "")
+		var code = OS.find_keycode_from_string(key_trimmed)
+		if code == KEY_NONE or code == KEY_UNKNOWN:
+			# Accept "control" as well as "ctrl"
+			if key.to_lower() == "control":
+				code = KEY_CTRL
+			else:
+				DebugConsole.log_error("No such key as \"" + key_trimmed + "\" exists.")
+				return
+		keycodes.append(code)
+
+	DebugConsole.get_console()._bind_command_resettable(command, keycodes)
+
+	var path = "user://cfg/_binds.cfg"
+	var file = FileAccess.open(path, FileAccess.READ_WRITE)
+	if not file:
+		file = FileAccess.open(path, FileAccess.WRITE_READ)
+
+	var bind_command = "bind \"" + command + "\" " + keys
+	for line in file.get_as_text().split("\n"):
+		if line == bind_command:
+			return
+
+	file.seek_end()
+	file.store_line(bind_command)
+
+func _remove_bind(keys):
+	var keys_text_split = keys.split("+")
+	var keycodes: Array[Key] = []
+	for key in keys_text_split:
+		keycodes.append(OS.find_keycode_from_string(key))
+
+	var path = "user://cfg/_binds.cfg"
+	var file = FileAccess.open(path, FileAccess.READ_WRITE)
+	if not file:
+		file = FileAccess.open(path, FileAccess.WRITE_READ)
+
+	var bind
+	for i in DebugConsole.get_console().command_binds:
+		if i.keys_display_text.to_upper() == keys.to_upper():
+			bind = i
+
+	var lines = file.get_as_text().split("\n")
+	var commands = bind.instructions.duplicate()
+	var count = 0
+	while count < lines.size():
+		if lines[count].begins_with("bind") and lines[count].to_upper().ends_with(bind.keys_display_text.to_upper()):
+			var words = lines[count].split(" ")
+			var command = words[1]
+			for i in range(2, words.size() - 1): command += " " + words[i]
+			command = command.replace("\"", "")
+
+			for i in range(commands.size()):
+				if commands[i].command == command:
+					commands.remove_at(i)
+					lines.remove_at(count)
+					break
+		else:
+			count += 1
+
+	if commands.size() >= 1: lines.append("remove_bind " + bind.keys_display_text)
+
+	file = FileAccess.open(path, FileAccess.WRITE)
+	for line in lines:
+		if line == "": continue
+		file.seek_end()
+		file.store_line(line)
+
+	DebugConsole.remove_bind_combo(keycodes)
+
+func _get_binds_text():
+	var binds_text = []
+	for bind in DebugConsole.get_console().command_binds:
+		binds_text.append(bind.keys_display_text)
+	return binds_text
+
+func _reset_binds():
+	var console = DebugConsole.get_console()
+	console.command_binds = []
+	for bind in console.original_binds:
+		console.command_binds.append(bind.copy())
+
+	var path = "user://cfg/_binds.cfg"
+	var file = FileAccess.open(path, FileAccess.WRITE)
