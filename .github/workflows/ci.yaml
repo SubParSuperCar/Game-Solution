@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, test ]
+  pull_request:
+    branches: [ main, test ]
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
+
+jobs:
+  build:
+    name: Build (${{ matrix.configuration }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [ Debug, Release ]
+
+    defaults:
+      run:
+        working-directory: src/Game
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.x'
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore Game.sln
+
+      - name: Build
+        run: dotnet build Game.sln --no-restore --configuration ${{ matrix.configuration }}
+
+      - name: Package source archive
+        if: matrix.configuration == 'Release'
+        working-directory: ${{ github.workspace }}
+        run: |
+          mkdir -p dist
+          git archive \
+            --format=zip \
+            --prefix=Game-Solution/ \
+            --output=dist/Game-Solution_src_${{ github.sha }}.zip \
+            HEAD
+
+      - name: Upload source archive artifact
+        if: matrix.configuration == 'Release'
+        uses: actions/upload-artifact@v7
+        with:
+          name: source-archive
+          path: dist/*.zip
+          retention-days: 30

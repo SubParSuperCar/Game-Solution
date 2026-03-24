@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://rd2cmut32jks"]
+
+[ext_resource type="Shader" uid="uid://dngocysnnqojl" path="res://shaders/night_sky.gdshader" id="1_k7hg5"]
+[ext_resource type="Script" uid="uid://jj10gqj3b0hv" path="res://scripts/AvUi.cs" id="2_a276p"]
+
+[sub_resource type="Environment" id="Environment_rffk7"]
+background_mode = 3
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+glow_blend_mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2yo11"]
+shader = ExtResource("1_k7hg5")
+
+[node name="Root" type="Node3D" unique_id=1068955502]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=742631528]
+environment = SubResource("Environment_rffk7")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=193970580]
+layer = -100
+
+[node name="NightSky" type="Panel" parent="Background" unique_id=997757433]
+material = SubResource("ShaderMaterial_2yo11")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Game" type="Node3D" parent="." unique_id=1042066917]
+
+[node name="AvaloniaUI" type="CanvasLayer" parent="." unique_id=588238717]
+
+[node name="EstragoniaBridge" type="Control" parent="AvaloniaUI" unique_id=1833721258]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("2_a276p")
