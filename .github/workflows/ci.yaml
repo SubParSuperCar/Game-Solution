@@ -2,14 +2,13 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, test ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, test ]
 
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_NOLOGO: true
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -44,7 +43,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore Game.sln
 
-      - name: Build (${{ matrix.configuration }})
+      - name: Build
         run: dotnet build Game.sln --no-restore --configuration ${{ matrix.configuration }}
 
       - name: Package source archive
