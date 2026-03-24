@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "p3EoMladA2E=",
+  "dgSpecHash": "8JlCAHkJxLB/se4AwkSjPqmO/beqKIGq4iR8HaiSfO4/DSPfmqqFlnq+tMhhKkEplqNuMNpYkABf3i8Fmnmndw==",
   "success": true,
   "projectFilePath": "/home/elio/RiderProjects/Game-Solution/src/Game/Game.csproj",
   "expectedPackageFiles": [
@@ -18,9 +18,9 @@
     "/home/elio/.nuget/packages/avalonia.xaml.interactions.responsive/11.2.0.1/avalonia.xaml.interactions.responsive.11.2.0.1.nupkg.sha512",
     "/home/elio/.nuget/packages/avalonia.xaml.interactivity/11.2.0.1/avalonia.xaml.interactivity.11.2.0.1.nupkg.sha512",
     "/home/elio/.nuget/packages/communitytoolkit.mvvm/8.4.0/communitytoolkit.mvvm.8.4.0.nupkg.sha512",
-    "/home/elio/.nuget/packages/godot.sourcegenerators/4.6.0/godot.sourcegenerators.4.6.0.nupkg.sha512",
-    "/home/elio/.nuget/packages/godotsharp/4.6.0/godotsharp.4.6.0.nupkg.sha512",
-    "/home/elio/.nuget/packages/godotsharpeditor/4.6.0/godotsharpeditor.4.6.0.nupkg.sha512",
+    "/home/elio/.nuget/packages/godot.sourcegenerators/4.6.1/godot.sourcegenerators.4.6.1.nupkg.sha512",
+    "/home/elio/.nuget/packages/godotsharp/4.6.1/godotsharp.4.6.1.nupkg.sha512",
+    "/home/elio/.nuget/packages/godotsharpeditor/4.6.1/godotsharpeditor.4.6.1.nupkg.sha512",
     "/home/elio/.nuget/packages/harfbuzzsharp/7.3.0.3/harfbuzzsharp.7.3.0.3.nupkg.sha512",
     "/home/elio/.nuget/packages/harfbuzzsharp.nativeassets.linux/7.3.0.3/harfbuzzsharp.nativeassets.linux.7.3.0.3.nupkg.sha512",
     "/home/elio/.nuget/packages/harfbuzzsharp.nativeassets.macos/7.3.0.3/harfbuzzsharp.nativeassets.macos.7.3.0.3.nupkg.sha512",
@@ -32,7 +32,8 @@
     "/home/elio/.nuget/packages/skiasharp.nativeassets.macos/2.88.9/skiasharp.nativeassets.macos.2.88.9.nupkg.sha512",
     "/home/elio/.nuget/packages/skiasharp.nativeassets.webassembly/2.88.9/skiasharp.nativeassets.webassembly.2.88.9.nupkg.sha512",
     "/home/elio/.nuget/packages/skiasharp.nativeassets.win32/2.88.9/skiasharp.nativeassets.win32.2.88.9.nupkg.sha512",
-    "/home/elio/.nuget/packages/system.reactive/6.0.1/system.reactive.6.0.1.nupkg.sha512"
+    "/home/elio/.nuget/packages/system.reactive/6.0.1/system.reactive.6.0.1.nupkg.sha512",
+    "/home/elio/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.25/microsoft.aspnetcore.app.ref.8.0.25.nupkg.sha512"
   ],
   "logs": []
 }
