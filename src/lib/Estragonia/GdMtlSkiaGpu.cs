@@ -28,13 +28,11 @@ internal sealed class GdMtlSkiaGpu : IGdSkiaGpu
 		// Get Metal device and command queue from Godot
 		var mtlDevice =
 			(IntPtr)_renderingDevice.GetDriverResource(RenderingDevice.DriverResource.LogicalDevice, default, 0UL);
-
 		if (mtlDevice == IntPtr.Zero)
 			throw new InvalidOperationException("Godot returned null for Metal device");
 
 		_mtlQueue = (IntPtr)_renderingDevice.GetDriverResource(RenderingDevice.DriverResource.CommandQueue, default,
 			0UL);
-
 		if (_mtlQueue == IntPtr.Zero)
 			throw new InvalidOperationException("Godot returned null for Metal command queue");
 
@@ -158,7 +156,8 @@ internal sealed class GdMtlSkiaGpu : IGdSkiaGpu
 				false,
 				gdMetalTexture);
 
-			if (backendTexture is null) return null;
+			if (backendTexture is null)
+				return null;
 
 			// Create Skia surface that renders directly to Godot's texture
 			var skSurface = SKSurface.Create(

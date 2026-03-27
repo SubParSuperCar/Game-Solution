@@ -43,7 +43,8 @@ internal sealed class GdMtlPlatformGraphics : IGdPlatformGraphics
 
 	public void Dispose()
 	{
-		if (_context is null) return;
+		if (_context is null)
+			return;
 
 		_context.Dispose();
 		_context = null;

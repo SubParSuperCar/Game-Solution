@@ -27,7 +27,8 @@ public class AvControl : GdControl
 		get => _control;
 		set
 		{
-			if (ReferenceEquals(_control, value)) return;
+			if (ReferenceEquals(_control, value))
+				return;
 			_control = value;
 
 			if (_topLevel is not null)
@@ -42,7 +43,8 @@ public class AvControl : GdControl
 		get => _renderScaling;
 		set
 		{
-			if (_renderScaling == value) return;
+			if (_renderScaling == value)
+				return;
 
 			_renderScaling = value;
 			OnResized();
@@ -108,7 +110,8 @@ public class AvControl : GdControl
 
 	public override void _Ready()
 	{
-		if (Engine.IsEditorHint()) return;
+		if (Engine.IsEditorHint())
+			return;
 
 		// Skia outputs a premultiplied alpha image, ensure we got the correct blend mode if the user didn't specify any
 		Material ??= new CanvasItemMaterial
@@ -171,7 +174,8 @@ public class AvControl : GdControl
 
 	private void OnResized()
 	{
-		if (_topLevel is null) return;
+		if (_topLevel is null)
+			return;
 
 		_topLevel.Impl.SetRenderSize(GetFrameSize(), RenderScaling);
 		RenderAvalonia();
@@ -179,11 +183,13 @@ public class AvControl : GdControl
 
 	private void OnFocusEntered()
 	{
-		if (_topLevel is null) return;
+		if (_topLevel is null)
+			return;
 
 		_topLevel.Focus();
 
-		if (KeyboardNavigationHandler.GetNext(_topLevel, NavigationDirection.Next) is not { } inputElement) return;
+		if (KeyboardNavigationHandler.GetNext(_topLevel, NavigationDirection.Next) is not { } inputElement)
+			return;
 
 		NavigationMethod navigationMethod;
 
@@ -202,7 +208,8 @@ public class AvControl : GdControl
 
 	public override void _Draw()
 	{
-		if (_topLevel is null) return;
+		if (_topLevel is null)
+			return;
 
 		var surface = _topLevel.Impl.GetOrCreateSurface();
 		DrawTexture(surface.GdTexture, Vector2.Zero);
@@ -210,7 +217,8 @@ public class AvControl : GdControl
 
 	public override void _GuiInput(InputEvent @event)
 	{
-		if (_topLevel is null) return;
+		if (_topLevel is null)
+			return;
 
 		if (TryHandleInput(_topLevel.Impl, @event) || TryHandleAction(@event))
 			AcceptEvent();
@@ -218,7 +226,8 @@ public class AvControl : GdControl
 
 	private bool TryHandleAction(InputEvent inputEvent)
 	{
-		if (!inputEvent.IsActionType()) return false;
+		if (!inputEvent.IsActionType())
+			return false;
 
 		if (inputEvent.IsActionPressed(GdBuiltInActions.UiFocusNext, true, true))
 			return TryMoveFocus(NavigationDirection.Next, inputEvent);
@@ -226,7 +235,8 @@ public class AvControl : GdControl
 		if (inputEvent.IsActionPressed(GdBuiltInActions.UiFocusPrev, true, true))
 			return TryMoveFocus(NavigationDirection.Previous, inputEvent);
 
-		if (!AutoConvertUiActionToKeyDown) return false;
+		if (!AutoConvertUiActionToKeyDown)
+			return false;
 
 		if (inputEvent.IsActionPressed(GdBuiltInActions.UiLeft, true, true))
 			return SimulateKeyDownFromAction(inputEvent, GdKey.Left);
@@ -249,9 +259,12 @@ public class AvControl : GdControl
 
 	private bool SimulateKeyDownFromAction(InputEvent inputEvent, GdKey key)
 	{
-		// if the action already matches the key we're going to simulate, abort: it already got through TryHandleInput and wasn't handled
-		if (inputEvent is InputEventKey inputEventKey && inputEventKey.Keycode == key) return false;
-		if (_topLevel?.FocusManager?.GetFocusedElement() is not { } currentElement) return false;
+		// If the action already matches the key we're going to simulate, abort: it already got through TryHandleInput and wasn't handled
+		if (inputEvent is InputEventKey inputEventKey && inputEventKey.Keycode == key)
+			return false;
+
+		if (_topLevel?.FocusManager?.GetFocusedElement() is not { } currentElement)
+			return false;
 
 		var args = new KeyEventArgs
 		{
@@ -259,7 +272,6 @@ public class AvControl : GdControl
 			Key = key.ToAvaloniaKey(),
 			KeyModifiers = inputEvent.GetKeyModifiers()
 		};
-
 		currentElement.RaiseEvent(args);
 		return args.Handled;
 	}
@@ -279,7 +291,8 @@ public class AvControl : GdControl
 
 	private bool TryMoveFocus(NavigationDirection direction, InputEvent inputEvent)
 	{
-		if (_topLevel?.FocusManager is not { } focusManager) return false;
+		if (_topLevel?.FocusManager is not { } focusManager)
+			return false;
 
 		var currentElement = focusManager.GetFocusedElement() ?? _topLevel;
 
@@ -299,7 +312,8 @@ public class AvControl : GdControl
 				nextElement = GetNextTabElement(_topLevel, direction);
 		}
 
-		if (nextElement is null) return false;
+		if (nextElement is null)
+			return false;
 
 		nextElement.Focus(NavigationMethod.Tab, inputEvent.GetKeyModifiers());
 		return true;
@@ -317,7 +331,8 @@ public class AvControl : GdControl
 				return next;
 
 			// Handle potential all-disabled cycle
-			if (next == element) return null;
+			if (next == element)
+				return null;
 
 			previous = next;
 		}

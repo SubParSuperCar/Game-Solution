@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<AnalysisMode>Recommended</AnalysisMode>
 		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<AnalysisMode>Recommended</AnalysisMode>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="GodotSharp" Version="4.6.0"/>

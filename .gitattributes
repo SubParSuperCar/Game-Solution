@@ -1,4 +1,4 @@
-* text=auto
+* text=auto eol=lf
 
 *.godot text eol=lf
 *.import text eol=lf

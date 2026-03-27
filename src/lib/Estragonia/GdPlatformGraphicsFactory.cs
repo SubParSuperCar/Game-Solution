@@ -10,10 +10,8 @@ internal static class GdPlatformGraphicsFactory
 	/// <returns>A Vulkan or Metal platform graphics implementation.</returns>
 	public static IGdPlatformGraphics Create()
 	{
-		var renderingDevice = RenderingServer.GetRenderingDevice();
-
-		if (renderingDevice is null)
-			throw new NotSupportedException("Estragonia requires Forward+ or Mobile renderer");
+		_ = RenderingServer.GetRenderingDevice() ??
+		    throw new NotSupportedException("Estragonia requires Forward+ or Mobile renderer");
 
 		if (ShouldUseMetal())
 			return new GdMtlPlatformGraphics();
@@ -34,8 +32,8 @@ internal static class GdPlatformGraphicsFactory
 			return true;
 
 		var macosDriver = settings.GetSetting("rendering/rendering_device/driver.macos").AsString();
+		// True: Default to Metal on Apple platforms
+		// False: User explicitly wants Vulkan (via MoltenVK)
 		return macosDriver != "vulkan";
-		// User explicitly wants Vulkan (via MoltenVK)
-		// Default to Metal on Apple platforms
 	}
 }
